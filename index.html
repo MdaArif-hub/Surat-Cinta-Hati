@@ -13,10 +13,6 @@
             margin: 0;
             padding: 20px; /* Ruang sekeliling */
             background-color: #fff5f5;
-            display: flex;
-            justify-content: center; /* Pusatkan mendatar */
-            align-items: center; /* Pusatkan menegak */
-            min-height: 100vh; /* Skrin penuh */
             position: relative;
             overflow-x: hidden;
             touch-action: manipulation;
@@ -34,6 +30,11 @@
             max-width: 800px; /* Had lebar */
             width: 100%; /* Responsive */
             margin: 20px auto; /* Ruang atas/bawah + pusat */
+            display: flex; /* Pemusatan dalam container */
+            flex-direction: column;
+            justify-content: center; /* Pusatkan mendatar dalam container */
+            align-items: center; /* Pusatkan menegak dalam container */
+            min-height: calc(100vh - 40px); /* Skrin penuh tolak padding */
         }
         .progress-container { width: 100%; background-color: #f3f3f3; border-radius: 20px; margin: 20px 0; overflow: hidden; }
         .progress-bar { height: 30px; background: linear-gradient(to right, #ff9a9e, #fad0c4); border-radius: 20px; width: 0%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
@@ -78,7 +79,6 @@
             user-select: none;
             pointer-events: none;
         }
-        /* Hadkan hati di tepi luar kotak */
         .floating-heart:nth-child(odd) {
             left: calc(0% + (Math.random() * (50% - 400px))); /* Tepi kiri */
             top: calc(Math.random() * 100%);
@@ -88,7 +88,20 @@
             top: calc(Math.random() * 100%);
         }
         @keyframes float { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 25% { transform: translate(5px, -10px) rotate(5deg); } 50% { transform: translate(-5px, -20px) rotate(-5deg); } 75% { transform: translate(5px, -10px) rotate(5deg); } }
-        .intro-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(255, 245, 245, 0.95); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 9999; animation: fadeIn 1s ease-in; }
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 245, 245, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            animation: fadeIn 1s ease-in;
+        }
         .intro-gif { width: 300px; height: auto; animation: popOut 0.5s ease-out 1s forwards; }
         .intro-text { margin-top: 20px; font-size: 18px; color: #e74c3c; text-align: center; }
         @keyframes popOut { 0% { transform: scale(0); } 80% { transform: scale(1.1); } 100% { transform: scale(1); } }
@@ -96,7 +109,7 @@
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; display: none; } }
         @media (max-width: 600px) {
             body { padding: 10px; }
-            .container { padding: 15px; margin: 10px auto; }
+            .container { padding: 15px; margin: 10px auto; min-height: calc(100vh - 20px); }
             .progress-bar { height: 25px; font-size: 14px; }
             button, input[type="text"] { width: 90%; padding: 10px 15px; }
             .subtitle { font-size: 16px; }
@@ -333,7 +346,7 @@
                 introOverlay.classList.add('fade-out');
                 setTimeout(() => {
                     introOverlay.style.display = 'none';
-                    mainContent.style.display = 'block';
+                    mainContent.style.display = 'flex'; /* Ganti ke flex supaya pemusatan berfungsi */
                     createFloatingHearts();
                 }, 500);
             });
@@ -353,7 +366,6 @@
                 heart.style.color = colors[Math.floor(Math.random() * colors.length)];
                 heart.style.opacity = Math.random() * 0.6 + 0.2;
                 
-                // Letak di tepi kiri atau kanan sahaja
                 if (i % 2 === 0) {
                     heart.style.left = `calc(${Math.random() * (50% - 400px)})`; // Tepi kiri
                 } else {
