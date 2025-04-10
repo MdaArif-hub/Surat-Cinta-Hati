@@ -11,63 +11,67 @@
             line-height: 1.6;
             color: #333;
             margin: 0;
-            padding: 20px; /* Ruang sekeliling */
+            padding: 0; /* Buang padding body supaya hati nampak penuh */
             background-color: #fff5f5;
             position: relative;
             overflow-x: hidden;
             touch-action: manipulation;
+            font-size: 14px; /* Font asas kecilkan dari 16px */
         }
-        h1 { color: #e74c3c; text-align: center; margin-bottom: 15px; }
-        .subtitle { text-align: center; color: #666; margin-bottom: 30px; font-size: 18px; }
+        h1 { color: #e74c3c; text-align: center; margin-bottom: 10px; font-size: 20px; } /* Dari 24px */
+        .subtitle { text-align: center; color: #666; margin-bottom: 20px; font-size: 14px; } /* Dari 18px */
         .container {
             background-color: white;
-            padding: 30px;
+            padding: 20px; /* Kecilkan padding dari 30px */
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-            position: relative;
+            position: fixed; /* Guna fixed supaya tengah skrin */
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%); /* Tengah betul-betul */
             z-index: 1;
             display: none;
-            max-width: 800px; /* Had lebar untuk desktop */
-            width: 100%; /* Responsive */
-            margin: 0 auto; /* Tengah mendatar */
-            /* Buang min-height, biar ikut kandungan */
+            max-width: 700px; /* Kecilkan dari 800px */
+            width: 90%; /* Responsive */
+            max-height: 80vh; /* Had tinggi supaya tak penuh skrin */
+            overflow-y: auto; /* Scroll kalau kandungan panjang */
         }
-        .progress-container { width: 100%; background-color: #f3f3f3; border-radius: 20px; margin: 20px 0; overflow: hidden; }
-        .progress-bar { height: 30px; background: linear-gradient(to right, #ff9a9e, #fad0c4); border-radius: 20px; width: 0%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
-        .question { margin-bottom: 20px; padding: 20px; background-color: #f8f9fa; border-radius: 8px; display: none; }
+        .progress-container { width: 100%; background-color: #f3f3f3; border-radius: 20px; margin: 15px 0; overflow: hidden; }
+        .progress-bar { height: 25px; background: linear-gradient(to right, #ff9a9e, #fad0c4); border-radius: 20px; width: 0%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px; } /* Dari 14px */
+        .question { margin-bottom: 15px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; display: none; }
         .question.active { display: block; animation: fadeIn 0.5s ease; }
-        .answer-options { display: flex; flex-direction: column; align-items: center; margin-top: 20px; }
-        button { background-color: #e74c3c; color: white; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-size: 16px; margin: 8px 0; transition: all 0.3s; width: 80%; max-width: 300px; position: relative; overflow: hidden; box-shadow: 0 4px 0 #c0392b; }
+        .answer-options { display: flex; flex-direction: column; align-items: center; margin-top: 15px; }
+        button { background-color: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-size: 14px; margin: 6px 0; transition: all 0.3s; width: 80%; max-width: 250px; position: relative; overflow: hidden; box-shadow: 0 3px 0 #c0392b; } /* Kecilkan dari 16px */
         button:disabled { background-color: #ccc; cursor: not-allowed; box-shadow: none; }
-        button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 6px 0 #c0392b; }
-        button:active:not(:disabled) { transform: translateY(1px); box-shadow: 0 2px 0 #c0392b; }
-        button.check-answers, button.share-result { background: linear-gradient(45deg, #ff9a9e, #fad0c4); color: #333; font-weight: bold; margin: 30px auto; display: block; width: 200px; box-shadow: 0 4px 0 #e0a7a7; }
-        button.check-answers:hover, button.share-result:hover { box-shadow: 0 6px 0 #e0a7a7; }
-        button.check-answers:active, button.share-result:active { box-shadow: 0 2px 0 #e0a7a7; }
+        button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 0 #c0392b; }
+        button:active:not(:disabled) { transform: translateY(1px); box-shadow: 0 1px 0 #c0392b; }
+        button.check-answers, button.share-result { background: linear-gradient(45deg, #ff9a9e, #fad0c4); color: #333; font-weight: bold; margin: 20px auto; display: block; width: 180px; box-shadow: 0 3px 0 #e0a7a7; }
+        button.check-answers:hover, button.share-result:hover { box-shadow: 0 5px 0 #e0a7a7; }
+        button.check-answers:active, button.share-result:active { box-shadow: 0 1px 0 #e0a7a7; }
         button.close-review, button.close-share { background-color: #e74c3c; color: white; }
-        input[type="text"] { padding: 12px; border: 2px solid #ff9a9e; border-radius: 25px; width: 80%; max-width: 300px; margin: 8px 0; font-size: 16px; text-align: center; transition: all 0.3s; }
+        input[type="text"] { padding: 10px; border: 2px solid #ff9a9e; border-radius: 25px; width: 80%; max-width: 250px; margin: 6px 0; font-size: 14px; text-align: center; transition: all 0.3s; }
         input[type="text"]:disabled { background-color: #f0f0f0; border-color: #ccc; }
         input[type="text"]:focus { outline: none; border-color: #e74c3c; box-shadow: 0 0 5px rgba(231, 76, 60, 0.5); }
         .shake { animation: shake 0.5s; border-color: #e74c3c !important; box-shadow: 0 0 10px rgba(231, 76, 60, 0.5) !important; }
         @keyframes shake { 0% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); } 20%, 40%, 60%, 80% { transform: translateX(5px); } 100% { transform: translateX(0); } }
-        .love-letter { display: none; padding: 20px; background-color: #fff; border: 1px solid #ffcccc; border-radius: 8px; margin-top: 20px; text-align: center; }
-        .love-letter h2 { color: #e74c3c; }
-        .love-letter p { font-size: 18px; margin-bottom: 15px; }
-        .signature { margin-top: 30px; font-style: italic; text-align: right; }
-        .copyright { margin-top: 60px; font-size: 12px; text-align: center; color: #999; line-height: 1.8; }
-        .review-container, .share-container { display: none; margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 8px; }
-        .review-question { margin-bottom: 15px; padding-bottom: 15px; border-bottom: 1px solid #ddd; }
-        .review-answer { margin-left: 20px; position: relative; padding-left: 25px; margin-bottom: 5px; }
-        .review-answer::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 12px; font-weight: bold; }
+        .love-letter { display: none; padding: 15px; background-color: #fff; border: 1px solid #ffcccc; border-radius: 8px; margin-top: 15px; text-align: center; }
+        .love-letter h2 { color: #e74c3c; font-size: 18px; } /* Dari 24px */
+        .love-letter p { font-size: 16px; margin-bottom: 10px; } /* Dari 18px */
+        .signature { margin-top: 20px; font-style: italic; text-align: right; }
+        .copyright { margin-top: 40px; font-size: 10px; text-align: center; color: #999; line-height: 1.8; } /* Dari 12px */
+        .review-container, .share-container { display: none; margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; }
+        .review-question { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd; }
+        .review-answer { margin-left: 15px; position: relative; padding-left: 20px; margin-bottom: 5px; }
+        .review-answer::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px; font-weight: bold; }
         .review-correct::before { background-color: #2ecc71; content: '✓'; }
         .review-half::before { background-color: #3498db; content: '~'; }
         .review-wrong::before { background-color: #e74c3c; content: '✗'; }
-        .review-selected { font-weight: bold; border-left: 3px solid #e74c3c; padding-left: 22px; }
+        .review-selected { font-weight: bold; border-left: 3px solid #e74c3c; padding-left: 17px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .heart { color: #e74c3c; font-size: 24px; }
+        .heart { color: #e74c3c; font-size: 20px; } /* Dari 24px */
         .floating-heart {
             position: absolute;
-            font-size: 20px;
+            font-size: 18px; /* Dari 20px */
             color: #ff9a9e;
             animation: float 6s ease-in-out infinite;
             opacity: 0.7;
@@ -91,20 +95,24 @@
             animation: fadeIn 1s ease-in;
             cursor: pointer;
         }
-        .intro-gif { width: 300px; height: auto; animation: popOut 0.5s ease-out 1s forwards; }
-        .intro-text { margin-top: 20px; font-size: 18px; color: #e74c3c; text-align: center; }
+        .intro-gif { width: 250px; height: auto; animation: popOut 0.5s ease-out 1s forwards; } /* Dari 300px */
+        .intro-text { margin-top: 15px; font-size: 16px; color: #e74c3c; text-align: center; } /* Dari 18px */
         @keyframes popOut { 0% { transform: scale(0); } 80% { transform: scale(1.1); } 100% { transform: scale(1); } }
         .intro-overlay.fade-out { animation: fadeOut 0.5s ease-out forwards; }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; display: none; } }
         @media (max-width: 600px) {
-            body { padding: 10px; }
-            .container { padding: 15px; }
-            .progress-bar { height: 25px; font-size: 14px; }
-            button, input[type="text"] { width: 90%; padding: 10px 15px; }
-            .subtitle { font-size: 16px; }
-            .floating-heart { font-size: 16px; }
-            .copyright { margin-top: 40px; }
-            .intro-gif { width: 200px; }
+            body { font-size: 12px; } /* Dari 14px */
+            .container { padding: 15px; max-width: 90%; }
+            h1 { font-size: 18px; }
+            .subtitle { font-size: 12px; }
+            .progress-bar { height: 20px; font-size: 10px; }
+            button { padding: 8px 15px; font-size: 12px; max-width: 200px; }
+            input[type="text"] { padding: 8px; font-size: 12px; max-width: 200px; }
+            .love-letter h2 { font-size: 16px; }
+            .love-letter p { font-size: 14px; }
+            .copyright { margin-top: 30px; font-size: 8px; }
+            .floating-heart { font-size: 14px; }
+            .intro-gif { width: 180px; } /* Dari 200px */
             .intro-text { font-size: 14px; }
         }
     </style>
@@ -211,29 +219,29 @@
         <div class="review-container" id="reviewContainer">
             <h3>Semakan Jawapan Tadi</h3>
             <div id="reviewContent"></div>
-            <button class="close-review" onclick="hideReview()" style="margin-top:20px;">Tutup Semakan</button>
+            <button class="close-review" onclick="hideReview()" style="margin-top:15px;">Tutup Semakan</button>
         </div>
         
         <div class="share-container" id="shareContainer">
             <h3>Share Result Anda</h3>
             <input type="text" id="shareLink" readonly style="width: 100%; margin-bottom: 10px;">
             <button onclick="copyLink()">Salin Link</button>
-            <button class="close-share" onclick="hideShare()" style="margin-top:20px;">Tutup</button>
+            <button class="close-share" onclick="hideShare()" style="margin-top:15px;">Tutup</button>
         </div>
         
         <div class="love-letter" id="loveLetter">
             <h2>Untukmu Sayangku... 🌸</h2>
             <div id="letterContent">
-                <p style="font-size: 20px;">Thankyou sayangku 🫶🏻💕</p>
-                <p style="font-size: 16px;">Apapun hasil dari percent dari jawapan ini, cukuplah kita berusaha untuk jadi lebih terbaik di masa hadapan 🌟</p>
-                <h2 style="font-size: 18px; color: #e74c3c;">Mana yang terkurang, boleh diusaha. Yang perfect, ditambahkan lagi! ✨</h2>
-                <p style="font-size: 18px;">Thankyou sayang... sebab dah bersama dengan b, selama ratusan ribuan tahunan saatan sehingga kinian.. masih tetap berdiri tegak pacak di sisi b.. 💞</p>
-                <p style="font-size: 20px;">InshaAllah masukkan dalam doa kita berdua, <strong>"Semoga Allah merestui dan memberikan kita berdua berjalan bersama dari pelaminan nikah, menjadi mempelai mahligai di dunia, dan akhirnya bersatu di singgahsana syurga." 🙏🏻🌹</strong></p>
-                <p style="font-size: 18px;">Semoga kita sama-sama bahagia selamanya, hingga ke syurga-Nya, <strong>aamin</strong> 🤲🏻🌙🕊️</p>
+                <p style="font-size: 18px;">Thankyou sayangku 🫶🏻💕</p>
+                <p style="font-size: 14px;">Apapun hasil dari percent dari jawapan ini, cukuplah kita berusaha untuk jadi lebih terbaik di masa hadapan 🌟</p>
+                <h2 style="font-size: 16px; color: #e74c3c;">Mana yang terkurang, boleh diusaha. Yang perfect, ditambahkan lagi! ✨</h2>
+                <p style="font-size: 16px;">Thankyou sayang... sebab dah bersama dengan b, selama ratusan ribuan tahunan saatan sehingga kinian.. masih tetap berdiri tegak pacak di sisi b.. 💞</p>
+                <p style="font-size: 18px;">InshaAllah masukkan dalam doa kita berdua, <strong>"Semoga Allah merestui dan memberikan kita berdua berjalan bersama dari pelaminan nikah, menjadi mempelai mahligai di dunia, dan akhirnya bersatu di singgahsana syurga." 🙏🏻🌹</strong></p>
+                <p style="font-size: 16px;">Semoga kita sama-sama bahagia selamanya, hingga ke syurga-Nya, <strong>aamin</strong> 🤲🏻🌙🕊️</p>
                 <div class="signature">
-                    <p style="font-size: 16px;">~ sekian dari usaha b yang tidak ternilai ini ~ 🌼</p>
-                    <p style="font-size: 24px;">💖🐻</p>
-                    <p style="font-size: 20px;"><strong>love you sayangku</strong> 💓</p>
+                    <p style="font-size: 14px;">~ sekian dari usaha b yang tidak ternilai ini ~ 🌼</p>
+                    <p style="font-size: 20px;">💖🐻</p>
+                    <p style="font-size: 18px;"><strong>love you sayangku</strong> 💓</p>
                 </div>
             </div>
         </div>
