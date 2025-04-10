@@ -27,14 +27,14 @@
             position: relative;
             z-index: 1;
             display: none;
-            max-width: 800px; /* Had lebar */
-            width: 100%; /* Responsive */
-            margin: 20px auto; /* Ruang atas/bawah + pusat */
-            display: flex; /* Pemusatan dalam container */
+            max-width: 800px;
+            width: 100%;
+            margin: 20px auto;
+            display: flex;
             flex-direction: column;
-            justify-content: center; /* Pusatkan mendatar dalam container */
-            align-items: center; /* Pusatkan menegak dalam container */
-            min-height: calc(100vh - 40px); /* Skrin penuh tolak padding */
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 40px);
         }
         .progress-container { width: 100%; background-color: #f3f3f3; border-radius: 20px; margin: 20px 0; overflow: hidden; }
         .progress-bar { height: 30px; background: linear-gradient(to right, #ff9a9e, #fad0c4); border-radius: 20px; width: 0%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
@@ -101,6 +101,7 @@
             align-items: center;
             z-index: 9999;
             animation: fadeIn 1s ease-in;
+            cursor: pointer; /* Tunjuk boleh klik */
         }
         .intro-gif { width: 300px; height: auto; animation: popOut 0.5s ease-out 1s forwards; }
         .intro-text { margin-top: 20px; font-size: 18px; color: #e74c3c; text-align: center; }
@@ -346,7 +347,7 @@
                 introOverlay.classList.add('fade-out');
                 setTimeout(() => {
                     introOverlay.style.display = 'none';
-                    mainContent.style.display = 'flex'; /* Ganti ke flex supaya pemusatan berfungsi */
+                    mainContent.style.display = 'flex';
                     createFloatingHearts();
                 }, 500);
             });
