@@ -68,8 +68,8 @@
         .review-half::before { background-color: #3498db; content: '~'; }
         .review-wrong::before { background-color: #e74c3c; content: '✗'; }
         .review-selected { font-weight: bold; border-left: 3px solid #e74c3c; padding-left: 17px; }
-        .result-container { display: none; text-align: left; }
-        .result-container h2 { color: #e74c3c; text-align: center; }
+        .result-container { display: none; text-align: left; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); max-width: 700px; width: 90%; max-height: 80vh; overflow-y: auto; }
+        .result-container h2 { color: #e74c3c; text-align: center; font-size: 22px; }
         .result-content { white-space: pre-wrap; font-size: 14px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .heart { color: #e74c3c; font-size: 20px; }
@@ -106,7 +106,7 @@
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; display: none; } }
         @media (max-width: 600px) {
             body { font-size: 16px; }
-            .container { 
+            .container, .result-container { 
                 padding: 15px; 
                 max-width: 90%; 
                 min-height: 33vh;
@@ -122,6 +122,8 @@
             .floating-heart { font-size: 16px; }
             .intro-gif { width: 200px; }
             .intro-text { font-size: 16px; }
+            .result-container h2 { font-size: 20px; }
+            .result-content { font-size: 16px; }
         }
     </style>
 </head>
@@ -156,66 +158,76 @@
         </div>
         
         <div class="question" id="question3">
-            <h3>3. Bila kita mula mulakan bibit cinta?</h3>
+            <h3>3. Favorite makanan yang b suka apa?</h3>
+            <div class="answer-options">
+                <button onclick="selectAnswer(3, 50, this, 'half')">Nasi goreng cina</button>
+                <button onclick="selectAnswer(3, 100, this, 'correct')">Nasi goreng kampung + telur mata goyang</button>
+                <button onclick="selectAnswer(3, 75, this, 'correct')">Kuey teow kungfu</button>
+                <button onclick="selectAnswer(3, 0, this, 'wrong')">Nasi goreng pattaya</button>
+            </div>
+        </div>
+        
+        <div class="question" id="question4">
+            <h3>4. Bila kita mula mulakan bibit cinta?</h3>
             <div class="answer-options">
                 <input type="text" id="dateAnswer" placeholder="Tulis tarikh di sini" onkeypress="handleEnter(event, checkDateAnswer)">
                 <button id="submitDate" onclick="checkDateAnswer()">Hantar</button>
             </div>
         </div>
         
-        <div class="question" id="question4">
-            <h3>4. Suka ke tengok b senyum?</h3>
-            <div class="answer-options">
-                <button onclick="selectAnswer(4, 0, this, 'wrong')">Tak</button>
-                <button onclick="selectAnswer(4, 100, this, 'correct')">Sebab nampak hensem</button>
-                <button onclick="selectAnswer(4, 100, this, 'correct')">100% sukee gilerrr</button>
-            </div>
-        </div>
-        
         <div class="question" id="question5">
-            <h3>5. Selalu tak sayang pikirkan b?</h3>
+            <h3>5. Suka ke tengok b senyum?</h3>
             <div class="answer-options">
-                <button onclick="selectAnswer(5, 100, this, 'correct')">Iya sayangku</button>
-                <button onclick="selectAnswer(5, 50, this, 'half')">Bila teringat je</button>
-                <button onclick="selectAnswer(5, 0, this, 'wrong')">Hm takk..</button>
+                <button onclick="selectAnswer(5, 0, this, 'wrong')">Tak</button>
+                <button onclick="selectAnswer(5, 100, this, 'correct')">Sebab nampak hensem</button>
+                <button onclick="selectAnswer(5, 100, this, 'correct')">100% sukee gilerrr</button>
             </div>
         </div>
         
         <div class="question" id="question6">
-            <h3>6. Besar mana rasa kepedulian sayang kat b ni?</h3>
+            <h3>6. Selalu tak sayang pikirkan b?</h3>
             <div class="answer-options">
-                <button onclick="selectAnswer(6, 100, this, 'correct')">Besar Galaxy</button>
-                <button onclick="selectAnswer(6, 50, this, 'half')">Separuh</button>
-                <button onclick="selectAnswer(6, 0, this, 'wrong')">Nape tanya</button>
+                <button onclick="selectAnswer(6, 100, this, 'correct')">Iya sayangku</button>
+                <button onclick="selectAnswer(6, 50, this, 'half')">Bila teringat je</button>
+                <button onclick="selectAnswer(6, 0, this, 'wrong')">Hm takk..</button>
             </div>
         </div>
         
         <div class="question" id="question7">
-            <h3>7. Pernah tak... sayang <strong>terpikir/imaginasi</strong> tentang "masa depan" dengan b tak?</h3>
+            <h3>7. Besar mana rasa kepedulian sayang kat b ni?</h3>
             <div class="answer-options">
-                <button onclick="selectAnswer(7, 100, this, 'correct')">Banyak sangattt</button>
-                <button onclick="selectAnswer(7, 50, this, 'half')">Kadang" je</button>
-                <button onclick="selectAnswer(7, 0, this, 'wrong')">Jarang</button>
+                <button onclick="selectAnswer(7, 100, this, 'correct')">Besar Galaxy</button>
+                <button onclick="selectAnswer(7, 50, this, 'half')">Separuh</button>
+                <button onclick="selectAnswer(7, 0, this, 'wrong')">Nape tanya</button>
             </div>
         </div>
         
         <div class="question" id="question8">
-            <h3>8. Berapa percent pentingnya b dalam hidup sayang?</h3>
+            <h3>8. Pernah tak... sayang <strong>terpikir/imaginasi</strong> tentang "masa depan" dengan b tak?</h3>
             <div class="answer-options">
-                <button onclick="selectAnswer(8, 0, this, 'wrong')">25%</button>
-                <button onclick="selectAnswer(8, 50, this, 'half')">50%</button>
-                <button onclick="selectAnswer(8, 50, this, 'half')">75%</button>
-                <button onclick="selectAnswer(8, 75, this, 'correct')">99.9%</button>
-                <button onclick="selectAnswer(8, 100, this, 'correct')">100%</button>
+                <button onclick="selectAnswer(8, 100, this, 'correct')">Banyak sangattt</button>
+                <button onclick="selectAnswer(8, 50, this, 'half')">Kadang" je</button>
+                <button onclick="selectAnswer(8, 0, this, 'wrong')">Jarang</button>
             </div>
         </div>
         
         <div class="question" id="question9">
-            <h3>9. Sayang betul-betul cintakan b?</h3>
+            <h3>9. Berapa percent pentingnya b dalam hidup sayang?</h3>
             <div class="answer-options">
-                <button onclick="selectAnswer(9, 100, this, 'correct')">Dengan sepenuh hati b</button>
-                <button onclick="selectAnswer(9, 50, this, 'half')">Mungkin</button>
-                <button onclick="selectAnswer(9, 0, this, 'wrong')">Tak yakinlah</button>
+                <button onclick="selectAnswer(9, 0, this, 'wrong')">25%</button>
+                <button onclick="selectAnswer(9, 50, this, 'half')">50%</button>
+                <button onclick="selectAnswer(9, 50, this, 'half')">75%</button>
+                <button onclick="selectAnswer(9, 75, this, 'correct')">99.9%</button>
+                <button onclick="selectAnswer(9, 100, this, 'correct')">100%</button>
+            </div>
+        </div>
+        
+        <div class="question" id="question10">
+            <h3>10. Sayang betul-betul cintakan b?</h3>
+            <div class="answer-options">
+                <button onclick="selectAnswer(10, 100, this, 'correct')">Dengan sepenuh hati b</button>
+                <button onclick="selectAnswer(10, 50, this, 'half')">Mungkin</button>
+                <button onclick="selectAnswer(10, 0, this, 'wrong')">Tak yakinlah</button>
             </div>
         </div>
         
@@ -237,11 +249,6 @@
             <button class="close-share" onclick="hideShare()" style="margin-top:15px;">Tutup</button>
         </div>
         
-        <div class="result-container" id="resultContainer">
-            <h2>Hasil Jawapan Cinta Kita</h2>
-            <div id="resultContent" class="result-content"></div>
-        </div>
-        
         <div class="love-letter" id="loveLetter">
             <h2>Untukmu Sayangku... 🌸</h2>
             <div id="letterContent">
@@ -259,16 +266,25 @@
             </div>
         </div>
         
-        <div class="copyright">
+        <div class="copyright" id="mainCopyright">
             Copyright ©️ mdanialarif07@gmail.com<br>
             #Arifanaksulung, #BabybecarAriana
+        </div>
+        
+        <div class="result-container" id="resultContainer">
+            <h2>Hasil Jawapan Cinta Kita</h2>
+            <div id="resultContent" class="result-content"></div>
+            <div class="copyright" style="margin-top: 20px; font-size: 10px; text-align: center; color: #999;">
+                Copyright ©️ mdanialarif07@gmail.com<br>
+                #Arifanaksulung, #BabybecarAriana
+            </div>
         </div>
     </div>
 
     <script>
         let currentQuestion = 1;
         let totalScore = 0;
-        const maxScore = 900;
+        const maxScore = 1000;
         let loveElements = [];
         let answers = [];
         let isSubmitted = false;
@@ -289,13 +305,22 @@
                 ]
             },
             {
-                question: "3. Bila kita mula mulakan bibit cinta?",
+                question: "3. Favorite makanan yang b suka apa?",
+                options: [
+                    { text: "Nasi goreng cina", score: 50, type: "half" },
+                    { text: "Nasi goreng kampung + telur mata goyang", score: 100, type: "correct" },
+                    { text: "Kuey teow kungfu", score: 75, type: "correct" },
+                    { text: "Nasi goreng pattaya", score: 0, type: "wrong" }
+                ]
+            },
+            {
+                question: "4. Bila kita mula mulakan bibit cinta?",
                 options: [
                     { text: "19 Disember 2022", score: 100, type: "correct" }
                 ]
             },
             {
-                question: "4. Suka ke tengok b senyum?",
+                question: "5. Suka ke tengok b senyum?",
                 options: [
                     { text: "Tak", score: 0, type: "wrong" },
                     { text: "Sebab nampak hensem", score: 100, type: "correct" },
@@ -303,7 +328,7 @@
                 ]
             },
             {
-                question: "5. Selalu tak sayang pikirkan b?",
+                question: "6. Selalu tak sayang pikirkan b?",
                 options: [
                     { text: "Iya sayangku", score: 100, type: "correct" },
                     { text: "Bila teringat je", score: 50, type: "half" },
@@ -311,7 +336,7 @@
                 ]
             },
             {
-                question: "6. Besar mana rasa kepedulian sayang kat b ni?",
+                question: "7. Besar mana rasa kepedulian sayang kat b ni?",
                 options: [
                     { text: "Besar Galaxy", score: 100, type: "correct" },
                     { text: "Separuh", score: 50, type: "half" },
@@ -319,7 +344,7 @@
                 ]
             },
             {
-                question: "7. Pernah tak... sayang <strong>terpikir/imaginasi</strong> tentang \"masa depan\" dengan b tak?",
+                question: "8. Pernah tak... sayang <strong>terpikir/imaginasi</strong> tentang \"masa depan\" dengan b tak?",
                 options: [
                     { text: "Banyak sangattt", score: 100, type: "correct" },
                     { text: "Kadang\" je", score: 50, type: "half" },
@@ -327,7 +352,7 @@
                 ]
             },
             {
-                question: "8. Berapa percent pentingnya b dalam hidup sayang?",
+                question: "9. Berapa percent pentingnya b dalam hidup sayang?",
                 options: [
                     { text: "25%", score: 0, type: "wrong" },
                     { text: "50%", score: 50, type: "half" },
@@ -337,7 +362,7 @@
                 ]
             },
             {
-                question: "9. Sayang betul-betul cintakan b?",
+                question: "10. Sayang betul-betul cintakan b?",
                 options: [
                     { text: "Dengan sepenuh hati b", score: 100, type: "correct" },
                     { text: "Mungkin", score: 50, type: "half" },
@@ -349,14 +374,21 @@
         document.addEventListener('DOMContentLoaded', function() {
             const introOverlay = document.getElementById('introOverlay');
             const mainContent = document.getElementById('mainContent');
+            const resultContainer = document.getElementById('resultContainer');
+            const mainCopyright = document.getElementById('mainCopyright');
             const urlParams = new URLSearchParams(window.location.search);
             
             if (urlParams.has('result')) {
-                // Direct ke hasil kalau ada ?result=
+                // Direct ke result view sahaja
                 const result = decodeURIComponent(urlParams.get('result'));
-                showResultDirect(result);
+                introOverlay.style.display = 'none';
+                mainContent.style.display = 'none'; // Sembunyikan semua soalan/surat
+                mainCopyright.style.display = 'none'; // Sembunyikan copyright utama
+                resultContainer.style.display = 'block';
+                document.getElementById('resultContent').textContent = result;
+                createFloatingHearts();
             } else {
-                // Kalau takde result, tunjuk intro macam biasa
+                // Normal flow dengan intro
                 introOverlay.addEventListener('click', function() {
                     introOverlay.classList.add('fade-out');
                     setTimeout(() => {
@@ -374,7 +406,7 @@
             
             for (let i = 0; i < 30; i++) {
                 const heart = document.createElement('div');
-                heart.className = 'floating-heart';
+                heart.className = 'floating streamlined integration-heart';
                 heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
                 heart.style.left = Math.random() * 100 + '%';
                 heart.style.top = Math.random() * 100 + '%';
@@ -414,7 +446,7 @@
             disableOptions(questionNum);
             document.getElementById(`question${questionNum}`).classList.remove('active');
             
-            if (questionNum === 9) {
+            if (questionNum === 10) {
                 showLoveLetter();
                 document.getElementById('reviewBtn').style.display = 'block';
                 document.getElementById('shareBtn').style.display = 'block';
@@ -510,21 +542,21 @@
             submitButton.className = '';
             submitButton.classList.add(type);
             
-            answers[2] = {
-                question: document.querySelector('#question3 h3').textContent,
+            answers[3] = {
+                question: document.querySelector('#question4 h3').textContent,
                 answer: answer,
                 type: type,
                 score: score
             };
             
             if (score === 0) {
-                allQuestions[2].options.push({ text: answer, score: score, type: type });
+                allQuestions[3].options.push({ text: answer, score: score, type: type });
             }
             
             totalScore += score;
             updateProgressBar();
-            disableOptions(3);
-            document.getElementById('question3').classList.remove('active');
+            disableOptions(4);
+            document.getElementById('question4').classList.remove('active');
             currentQuestion++;
             document.getElementById(`question${currentQuestion}`).classList.add('active');
         }
@@ -638,19 +670,6 @@
             shareLink.select();
             document.execCommand('copy');
             alert('Link disalin ke papan klip!');
-        }
-        
-        function showResultDirect(result) {
-            const mainContent = document.getElementById('mainContent');
-            const introOverlay = document.getElementById('introOverlay');
-            const resultContainer = document.getElementById('resultContainer');
-            const resultContent = document.getElementById('resultContent');
-            
-            introOverlay.style.display = 'none';
-            mainContent.style.display = 'block';
-            resultContainer.style.display = 'block';
-            resultContent.textContent = result;
-            createFloatingHearts(); // Tambah hati terapung untuk cantik
         }
     </script>
 </body>
