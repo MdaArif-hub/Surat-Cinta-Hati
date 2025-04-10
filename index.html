@@ -29,13 +29,22 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            z-index: 1;
+            z-index: 10;
             display: none;
             max-width: 700px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
             min-height: 33vh;
+        }
+        .background-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Lapisan khusus untuk bunga & hati */
+            pointer-events: none; /* Pastikan tak ganggu interaksi */
         }
         .progress-container { width: 100%; background-color: #f3f3f3; border-radius: 20px; margin: 15px 0; overflow: hidden; }
         .progress-bar { height: 25px; background: linear-gradient(to right, #ff9a9e, #fad0c4); border-radius: 20px; width: 0%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px; }
@@ -70,17 +79,20 @@
         .review-selected { font-weight: bold; border-left: 3px solid #e74c3c; padding-left: 17px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .heart { color: #e74c3c; font-size: 20px; }
-        .floating-heart {
+        .soft-element {
             position: absolute;
             font-size: 18px;
             color: #ff9a9e;
-            animation: float 6s ease-in-out infinite;
-            opacity: 0.7;
-            z-index: 0;
+            animation: floatSoft 8s ease-in-out infinite;
+            opacity: 0.5;
+            z-index: 0; /* Pastikan kekal di belakang */
             user-select: none;
             pointer-events: none;
         }
-        @keyframes float { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 25% { transform: translate(5px, -10px) rotate(5deg); } 50% { transform: translate(-5px, -20px) rotate(-5deg); } 75% { transform: translate(5px, -10px) rotate(5deg); } }
+        @keyframes floatSoft {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
         .intro-overlay {
             position: fixed;
             top: 0;
@@ -92,7 +104,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            z-index: 9999;
+            z-index: 100;
             animation: fadeIn 1s ease-in;
             cursor: pointer;
         }
@@ -116,13 +128,15 @@
             .love-letter h2 { font-size: 18px; }
             .love-letter p { font-size: 16px; }
             .copyright { margin-top: 30px; font-size: 10px; }
-            .floating-heart { font-size: 16px; }
+            .soft-element { font-size: 16px; }
             .intro-gif { width: 200px; }
             .intro-text { font-size: 16px; }
         }
     </style>
 </head>
 <body>
+    <div class="background-layer" id="backgroundLayer"></div> <!-- Lapisan baru untuk bunga & hati -->
+
     <div class="intro-overlay" id="introOverlay">
         <img src="images/kiss.gif" alt="Cute Kiss GIF" class="intro-gif">
         <div class="intro-text">Tekan sahaja di mana-mana bahagian screen</div>
@@ -263,7 +277,6 @@
         let currentQuestion = 1;
         let totalScore = 0;
         const maxScore = 1000;
-        let loveElements = [];
         let answers = [];
         let isSubmitted = false;
 
@@ -352,34 +365,34 @@
         document.addEventListener('DOMContentLoaded', function() {
             const introOverlay = document.getElementById('introOverlay');
             const mainContent = document.getElementById('mainContent');
+            const backgroundLayer = document.getElementById('backgroundLayer');
             
             introOverlay.addEventListener('click', function() {
                 introOverlay.classList.add('fade-out');
                 setTimeout(() => {
                     introOverlay.style.display = 'none';
                     mainContent.style.display = 'block';
-                    createFloatingHearts();
+                    createSoftBackground(backgroundLayer); // Tambah ke lapisan khusus
                 }, 500);
             });
         });
         
-        function createFloatingHearts() {
-            const heartSymbols = ['❤', '💖', '💘', '💝', '💟', '♥', '❣', '💕', '💓', '💗'];
-            const colors = ['#ff9a9e', '#fad0c4', '#ff6b6b', '#ff7675', '#e74c3c', '#ff9ff3', '#feca57', '#ff6b6b'];
+        function createSoftBackground(layer) {
+            const softSymbols = ['♥', '🌸', '🌼', '✿', '❀', '💗', '🌷', '💞'];
+            const colors = ['#ff9a9e', '#fad0c4', '#ffcccb', '#ffb6c1', '#f8b8d0', '#f9d6e2'];
             
-            for (let i = 0; i < 30; i++) {
-                const heart = document.createElement('div');
-                heart.className = 'floating-heart';
-                heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
-                heart.style.left = Math.random() * 100 + '%';
-                heart.style.top = Math.random() * 100 + '%';
-                heart.style.fontSize = (Math.random() * 20 + 12) + 'px';
-                heart.style.animationDuration = (Math.random() * 6 + 4) + 's';
-                heart.style.animationDelay = Math.random() * 5 + 's';
-                heart.style.color = colors[Math.floor(Math.random() * colors.length)];
-                heart.style.opacity = Math.random() * 0.6 + 0.2;
-                document.body.appendChild(heart);
-                loveElements.push(heart);
+            for (let i = 0; i < 20; i++) {
+                const element = document.createElement('div');
+                element.className = 'soft-element';
+                element.textContent = softSymbols[Math.floor(Math.random() * softSymbols.length)];
+                element.style.left = Math.random() * 100 + '%';
+                element.style.top = Math.random() * 100 + '%';
+                element.style.fontSize = (Math.random() * 20 + 12) + 'px';
+                element.style.animationDuration = (Math.random() * 4 + 6) + 's';
+                element.style.animationDelay = Math.random() * 3 + 's';
+                element.style.color = colors[Math.floor(Math.random() * colors.length)];
+                element.style.opacity = Math.random() * 0.4 + 0.2;
+                layer.appendChild(element); // Tambah ke background-layer, bukan body
             }
         }
         
@@ -447,7 +460,6 @@
             if (answer.includes('biru')) {
                 score = 100;
                 type = 'correct';
-                createCelebrationHearts(5);
             } else if (answer.includes('hitam')) {
                 score = 75;
                 type = 'correct';
@@ -498,7 +510,6 @@
             if (datePattern.test(answer)) {
                 score = 100;
                 type = 'correct';
-                createCelebrationHearts(5);
             }
             
             submitButton.className = '';
@@ -528,23 +539,6 @@
             const progressBar = document.getElementById('progressBar');
             progressBar.style.width = percentage + '%';
             progressBar.textContent = percentage + '%';
-        }
-        
-        function createCelebrationHearts(count) {
-            for (let i = 0; i < count; i++) {
-                setTimeout(() => {
-                    const heart = document.createElement('div');
-                    heart.className = 'floating-heart';
-                    heart.textContent = ['❤', '💖', '💘', '💝', '💟'][Math.floor(Math.random() * 5)];
-                    heart.style.left = Math.random() * 100 + '%';
-                    heart.style.top = '100%';
-                    heart.style.fontSize = (Math.random() * 30 + 20) + 'px';
-                    heart.style.animation = 'float 3s ease-in forwards';
-                    heart.style.color = '#e74c3c';
-                    document.body.appendChild(heart);
-                    setTimeout(() => heart.remove(), 3000);
-                }, i * 300);
-            }
         }
         
         function showLoveLetter() {
