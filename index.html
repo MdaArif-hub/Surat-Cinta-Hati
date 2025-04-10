@@ -35,7 +35,7 @@
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
-            min-height: 33vh; /* Kekal 33vh untuk semua */
+            min-height: 33vh;
         }
         .progress-container { width: 100%; background-color: #f3f3f3; border-radius: 20px; margin: 15px 0; overflow: hidden; }
         .progress-bar { height: 25px; background: linear-gradient(to right, #ff9a9e, #fad0c4); border-radius: 20px; width: 0%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px; }
@@ -60,7 +60,7 @@
         .love-letter p { font-size: 16px; margin-bottom: 10px; }
         .signature { margin-top: 20px; font-style: italic; text-align: right; }
         .copyright { margin-top: 40px; font-size: 10px; text-align: center; color: #999; line-height: 1.8; }
-        .review-container, .share-container { display: none; margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; }
+        .review-container, .share-container, .result-container { display: none; margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; }
         .review-question { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd; }
         .review-answer { margin-left: 15px; position: relative; padding-left: 20px; margin-bottom: 5px; }
         .review-answer::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px; font-weight: bold; }
@@ -68,6 +68,9 @@
         .review-half::before { background-color: #3498db; content: '~'; }
         .review-wrong::before { background-color: #e74c3c; content: '✗'; }
         .review-selected { font-weight: bold; border-left: 3px solid #e74c3c; padding-left: 17px; }
+        .result-container { display: none; text-align: left; }
+        .result-container h2 { color: #e74c3c; text-align: center; }
+        .result-content { white-space: pre-wrap; font-size: 14px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         .heart { color: #e74c3c; font-size: 20px; }
         .floating-heart {
@@ -102,21 +105,21 @@
         .intro-overlay.fade-out { animation: fadeOut 0.5s ease-out forwards; }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; display: none; } }
         @media (max-width: 600px) {
-            body { font-size: 16px; } /* Besarkan dari 14px */
+            body { font-size: 16px; }
             .container { 
                 padding: 15px; 
                 max-width: 90%; 
-                min-height: 33vh; /* Kekal 33vh, buang 66vh */
+                min-height: 33vh;
             }
-            h1 { font-size: 22px; } /* Besarkan dari 20px */
-            .subtitle { font-size: 16px; } /* Besarkan dari 14px */
-            .progress-bar { height: 20px; font-size: 14px; } /* Besarkan dari 12px */
-            button { padding: 10px 15px; font-size: 16px; max-width: 220px; } /* Besarkan dari 14px */
-            input[type="text"] { padding: 10px; font-size: 16px; max-width: 220px; } /* Besarkan dari 14px */
+            h1 { font-size: 22px; }
+            .subtitle { font-size: 16px; }
+            .progress-bar { height: 20px; font-size: 14px; }
+            button { padding: 10px 15px; font-size: 16px; max-width: 220px; }
+            input[type="text"] { padding: 10px; font-size: 16px; max-width: 220px; }
             .love-letter h2 { font-size: 18px; }
             .love-letter p { font-size: 16px; }
             .copyright { margin-top: 30px; font-size: 10px; }
-            .floating-heart { font-size: 16px; } /* Besarkan dari 14px */
+            .floating-heart { font-size: 16px; }
             .intro-gif { width: 200px; }
             .intro-text { font-size: 16px; }
         }
@@ -234,6 +237,11 @@
             <button class="close-share" onclick="hideShare()" style="margin-top:15px;">Tutup</button>
         </div>
         
+        <div class="result-container" id="resultContainer">
+            <h2>Hasil Jawapan Cinta Kita</h2>
+            <div id="resultContent" class="result-content"></div>
+        </div>
+        
         <div class="love-letter" id="loveLetter">
             <h2>Untukmu Sayangku... 🌸</h2>
             <div id="letterContent">
@@ -341,15 +349,23 @@
         document.addEventListener('DOMContentLoaded', function() {
             const introOverlay = document.getElementById('introOverlay');
             const mainContent = document.getElementById('mainContent');
+            const urlParams = new URLSearchParams(window.location.search);
             
-            introOverlay.addEventListener('click', function() {
-                introOverlay.classList.add('fade-out');
-                setTimeout(() => {
-                    introOverlay.style.display = 'none';
-                    mainContent.style.display = 'block';
-                    createFloatingHearts();
-                }, 500);
-            });
+            if (urlParams.has('result')) {
+                // Direct ke hasil kalau ada ?result=
+                const result = decodeURIComponent(urlParams.get('result'));
+                showResultDirect(result);
+            } else {
+                // Kalau takde result, tunjuk intro macam biasa
+                introOverlay.addEventListener('click', function() {
+                    introOverlay.classList.add('fade-out');
+                    setTimeout(() => {
+                        introOverlay.style.display = 'none';
+                        mainContent.style.display = 'block';
+                        createFloatingHearts();
+                    }, 500);
+                });
+            }
         });
         
         function createFloatingHearts() {
@@ -624,10 +640,17 @@
             alert('Link disalin ke papan klip!');
         }
         
-        if (window.location.search.includes('result=')) {
-            const urlParams = new URLSearchParams(window.location.search);
-            const result = decodeURIComponent(urlParams.get('result'));
-            alert('Hasil yang dikongsi:\n\n' + result);
+        function showResultDirect(result) {
+            const mainContent = document.getElementById('mainContent');
+            const introOverlay = document.getElementById('introOverlay');
+            const resultContainer = document.getElementById('resultContainer');
+            const resultContent = document.getElementById('resultContent');
+            
+            introOverlay.style.display = 'none';
+            mainContent.style.display = 'block';
+            resultContainer.style.display = 'block';
+            resultContent.textContent = result;
+            createFloatingHearts(); // Tambah hati terapung untuk cantik
         }
     </script>
 </body>
