@@ -21,7 +21,7 @@
         h1 { color: #e74c3c; text-align: center; margin-bottom: 10px; font-size: 20px; }
         .subtitle { text-align: center; color: #666; margin-bottom: 20px; font-size: 14px; }
         .container {
-            background-color: white;
+            background-color: #fffafa; /* Ubah dari white ke pink超cair */
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -381,7 +381,7 @@
             const softSymbols = ['♥', '🌸', '🌼', '✿', '❀', '💗', '🌷', '💞'];
             const colors = ['#ff9a9e', '#fad0c4', '#ffcccb', '#ffb6c1', '#f8b8d0', '#f9d6e2'];
             
-            for (let i = 0; i < 70; i++) { // Tambah ke 70 untuk lebih bunga & hati
+            for (let i = 0; i < 70; i++) {
                 const element = document.createElement('div');
                 element.className = 'soft-element';
                 element.textContent = softSymbols[Math.floor(Math.random() * softSymbols.length)];
