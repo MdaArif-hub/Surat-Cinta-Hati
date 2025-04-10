@@ -74,6 +74,14 @@
             75% { transform: translateX(-3px); }
             100% { transform: translateX(0); }
         }
+        .love-heart {
+            position: absolute;
+            color: #e74c3c;
+            font-size: 10px; /* Saiz kecil pada 0% */
+            z-index: 15; /* Depan container tapi belakang audio controls */
+            transition: font-size 0.5s ease, transform 0.5s ease; /* Smooth growth */
+            pointer-events: none;
+        }
         .question { margin-bottom: 15px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; display: none; }
         .question.active { display: block; animation: fadeIn 0.5s ease; }
         .answer-options { display: flex; flex-direction: column; align-items: center; margin-top: 15px; }
@@ -188,20 +196,30 @@
         }
         .intro-overlay.fade-out { animation: fadeOut 0.5s ease-out forwards; }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; display: none; } }
-        .audio-control {
+        .audio-controls-container {
             position: fixed;
             top: 10px;
             right: 10px;
             z-index: 20;
             background-color: #ffffff;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .audio-control {
+            background-color: #ffffff;
             color: #333;
             border: 2px solid #e74c3c;
-            padding: 8px 12px;
+            padding: 4px 6px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 18px;
+            font-size: 16px;
             transition: all 0.3s;
             box-shadow: 0 2px 0 #ccc;
+            margin-bottom: 8px;
         }
         .audio-control.muted {
             background-color: #e74c3c;
@@ -216,21 +234,10 @@
         .video-container { display: none; margin-top: 20px; text-align: center; }
         .video-container video { width: 100%; max-width: 560px; height: 315px; border-radius: 8px; }
         .play-video-btn { background-color: #ff9a9e; width: 180px; margin: 0 auto; }
-        /* Styling untuk Volume Sliders */
-        .volume-controls {
-            position: fixed;
-            top: 50px;
-            right: 10px;
-            z-index: 20;
-            background-color: #ffffff;
-            padding: 10px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
         .volume-control {
             display: flex;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 6px;
         }
         .volume-control label {
             font-size: 12px;
@@ -276,33 +283,33 @@
             .soft-element { font-size: 16px; }
             .intro-gif { width: 200px; }
             .intro-text { font-size: 16px; }
-            .audio-control { padding: 6px 10px; font-size: 16px; }
+            .audio-controls-container { top: 5px; right: 5px; padding: 6px; }
+            .audio-control { padding: 4px 6px; font-size: 14px; margin-bottom: 6px; }
             .video-container video { height: 200px; }
-            .volume-controls { top: 40px; right: 5px; }
             .volume-control label { font-size: 10px; }
             input[type="range"] { width: 80px; }
+            .love-heart { font-size: 8px; } /* Saiz kecil pada skrin kecil */
         }
     </style>
 </head>
 <body>
     <div class="background-layer" id="backgroundLayer"></div>
+    <div class="love-heart" id="loveHeart">❤</div>
 
     <!-- Audio Background -->
     <audio id="backgroundMusic" loop>
         <source src="A Himitsu - I Should Let You Go (feat. Nori).mp3" type="audio/mp3">
         Audio tidak disokong oleh pelayar anda.
     </audio>
-    <!-- Audio untuk Kesan Bunyi -->
     <audio id="errorSound">
         <source src="error sound.mp3" type="audio/mp3">
     </audio>
     <audio id="clickSound">
         <source src="normal click btn sound.mp3" type="audio/mp3">
     </audio>
-    <button class="audio-control" id="muteBtn" onclick="toggleMute()">🔊</button>
 
-    <!-- Volume Controls -->
-    <div class="volume-controls">
+    <div class="audio-controls-container">
+        <button class="audio-control" id="muteBtn" onclick="toggleMute()">🔊</button>
         <div class="volume-control">
             <label for="bgVolume">BG Music:</label>
             <input type="range" id="bgVolume" min="0" max="100" value="75">
@@ -427,21 +434,21 @@
         </div>
         
         <div class="love-letter" id="loveLetter">
-            <h2>Untukmu Sayangku... 🌸</h2>
+            <h2 style="font-family: 'Segoe UI', Tahoma, sans-serif; font-size: 20px; color: #e74c3c; margin-bottom: 15px;">Untukmu Sayangku... 🌸</h2>
             <div id="letterContent">
-                <p style="font-size: 18px;">Thankyou sayangku 🫶🏻💕</p>
-                <p style="font-size: 14px;">Apapun hasil dari percent dari jawapan ini, cukuplah kita berusaha untuk jadi lebih terbaik di masa hadapan 🌟</p>
-                <h2 style="font-size: 16px; color: #e74c3c;">Mana yang terkurang, boleh diusaha. Yang perfect, ditambahkan lagi! ✨</h2>
-                <p style="font-size: 16px;">Thankyou sayang... sebab dah bersama dengan b, selama ratusan ribuan tahunan saatan sehingga kinian.. masih tetap berdiri tegak pacak di sisi b.. 💞</p>
-                <p style="font-size: 18px;">InshaAllah masukkan dalam doa kita berdua, <strong>"Semoga Allah merestui dan memberikan kita berdua berjalan bersama dari pelaminan nikah, menjadi mempelai mahligai di dunia, dan akhirnya bersatu di singgahsana syurga." 🙏🏻🌹</strong></p>
-                <p style="font-size: 16px;">Semoga kita sama-sama bahagia selamanya, hingga ke syurga-Nya, <strong>aamin</strong> 🤲🏻🌙🕊️</p>
-                <div class="signature">
-                    <p style="font-size: 14px;">~ sekian dari usaha b yang tidak ternilai ini ~ 🌼</p>
-                    <p style="font-size: 20px;">💖🐻</p>
-                    <p style="font-size: 18px;"><strong>love you sayangku</strong> 💓</p>
+                <p style="font-size: 18px; color: #333; margin-bottom: 10px;">Thankyou sayangku 🫶🏻💕</p>
+                <p style="font-size: 14px; color: #666; margin-bottom: 15px;">Apapun hasil dari percent dari jawapan ini, cukuplah kita berusaha untuk jadi lebih terbaik di masa hadapan 🌟</p>
+                <h2 style="font-size: 16px; color: #e74c3c; margin-bottom: 15px;">Mana yang terkurang, boleh diusaha. Yang perfect, ditambahkan lagi! ✨</h2>
+                <p style="font-size: 16px; color: #333; margin-bottom: 15px;">Thankyou sayang... sebab dah bersama dengan b, selama ratusan ribuan tahunan saatan sehingga kinian.. masih tetap berdiri tegak pacak di sisi b.. 💞</p>
+                <p style="font-size: 18px; color: #333; margin-bottom: 15px;">InshaAllah masukkan dalam doa kita berdua, <strong style="color: #e74c3c;">"Semoga Allah merestui dan memberikan kita berdua berjalan bersama dari pelaminan nikah, menjadi mempelai mahligai di dunia, dan akhirnya bersatu di singgahsana syurga."</strong> 🙏🏻🌹</p>
+                <p style="font-size: 16px; color: #333; margin-bottom: 20px;">Semoga kita sama-sama bahagia selamanya, hingga ke syurga-Nya, <strong style="color: #e74c3c;">aamin</strong> 🤲🏻🌙🕊️</p>
+                <p style="font-size: 16px; color: #555; font-style: italic; margin-bottom: 15px;">"<strong style="color: #e74c3c;">Selamat Harijadi buah hati b ini yang <em>ke-20</em></strong>, semoga sentiasa menjadi anak yang solehah, sentiasa berusaha menjadi lagi terbaik dari yang terbaik! b sama-sama doakan kesejahteraan, keselamatan, kebahagiaan kita berdua bermula dari sekarang.. sehingga la di kemudian hari, <strong style="color: #e74c3c;">aamin YA Rabbal A'lamin</strong> 🤲🏻"</p>
+                <div class="signature" style="text-align: right;">
+                    <p style="font-size: 14px; color: #666; margin-bottom: 10px;">~ sekian dari usaha b yang tidak ternilai ini ~ 🌼</p>
+                    <p style="font-size: 20px; color: #e74c3c; margin-bottom: 10px;">💖🐻</p>
+                    <p style="font-size: 18px; color: #333;"><strong>love you sayangku</strong> 💓</p>
                 </div>
             </div>
-            <!-- Video Button & Container -->
             <button class="play-video-btn" onclick="showVideo()">Main Video Istimewa 🎥</button>
             <div class="video-container" id="videoContainer">
                 <video controls id="specialVideo">
@@ -467,85 +474,16 @@
         let wasMutedManually = false;
 
         const allQuestions = [
-            {
-                question: "1. Sayang... sayangkan b?",
-                options: [
-                    { text: "Mestilah sayang", score: 100, type: "correct" },
-                    { text: "Hurmm", score: 0, type: "wrong" }
-                ]
-            },
-            {
-                question: "2. Apa warna favourite b?",
-                options: [
-                    { text: "biru", score: 100, type: "correct" },
-                    { text: "hitam", score: 75, type: "correct" }
-                ]
-            },
-            {
-                question: "3. Favorite makanan yang b suka apa?",
-                options: [
-                    { text: "Nasi goreng cina", score: 50, type: "half" },
-                    { text: "Nasi goreng kampung + telur mata goyang", score: 75, type: "correct" },
-                    { text: "Kuey teow kungfu", score: 75, type: "correct" },
-                    { text: "Nasi goreng pattaya", score: 100, type: "correct" }
-                ]
-            },
-            {
-                question: "4. Bila kita mula mulakan bibit cinta?",
-                options: [
-                    { text: "19 Disember 2022", score: 100, type: "correct" }
-                ]
-            },
-            {
-                question: "5. Suka ke tengok b senyum?",
-                options: [
-                    { text: "Tak", score: 0, type: "wrong" },
-                    { text: "Sebab nampak hensem", score: 100, type: "correct" },
-                    { text: "100% sukee gilerrr", score: 100, type: "correct" }
-                ]
-            },
-            {
-                question: "6. Selalu tak sayang pikirkan b?",
-                options: [
-                    { text: "Iya sayangku", score: 100, type: "correct" },
-                    { text: "Bila teringat je", score: 50, type: "half" },
-                    { text: "Hm takk..", score: 0, type: "wrong" }
-                ]
-            },
-            {
-                question: "7. Besar mana rasa kepedulian sayang kat b ni?",
-                options: [
-                    { text: "Besar Galaxy", score: 100, type: "correct" },
-                    { text: "Separuh", score: 50, type: "half" },
-                    { text: "Nape tanya", score: 0, type: "wrong" }
-                ]
-            },
-            {
-                question: "8. Pernah tak... sayang <strong>terpikir/imaginasi</strong> tentang \"masa depan\" dengan b tak?",
-                options: [
-                    { text: "Banyak sangattt", score: 100, type: "correct" },
-                    { text: "Kadang\" je", score: 50, type: "half" },
-                    { text: "Jarang", score: 0, type: "wrong" }
-                ]
-            },
-            {
-                question: "9. Berapa percent pentingnya b dalam hidup sayang?",
-                options: [
-                    { text: "25%", score: 0, type: "wrong" },
-                    { text: "50%", score: 50, type: "half" },
-                    { text: "75%", score: 50, type: "half" },
-                    { text: "99.9%", score: 75, type: "correct" },
-                    { text: "100%", score: 100, type: "correct" }
-                ]
-            },
-            {
-                question: "10. Sayang betul-betul cintakan b?",
-                options: [
-                    { text: "Dengan sepenuh hati b", score: 100, type: "correct" },
-                    { text: "Mungkin", score: 50, type: "half" },
-                    { text: "Tak yakinlah", score: 0, type: "wrong" }
-                ]
-            }
+            { question: "1. Sayang... sayangkan b?", options: [{ text: "Mestilah sayang", score: 100, type: "correct" }, { text: "Hurmm", score: 0, type: "wrong" }] },
+            { question: "2. Apa warna favourite b?", options: [{ text: "biru", score: 100, type: "correct" }, { text: "hitam", score: 75, type: "correct" }] },
+            { question: "3. Favorite makanan yang b suka apa?", options: [{ text: "Nasi goreng cina", score: 50, type: "half" }, { text: "Nasi goreng kampung + telur mata goyang", score: 75, type: "correct" }, { text: "Kuey teow kungfu", score: 75, type: "correct" }, { text: "Nasi goreng pattaya", score: 100, type: "correct" }] },
+            { question: "4. Bila kita mula mulakan bibit cinta?", options: [{ text: "19 Disember 2022", score: 100, type: "correct" }] },
+            { question: "5. Suka ke tengok b senyum?", options: [{ text: "Tak", score: 0, type: "wrong" }, { text: "Sebab nampak hensem", score: 100, type: "correct" }, { text: "100% sukee gilerrr", score: 100, type: "correct" }] },
+            { question: "6. Selalu tak sayang pikirkan b?", options: [{ text: "Iya sayangku", score: 100, type: "correct" }, { text: "Bila teringat je", score: 50, type: "half" }, { text: "Hm takk..", score: 0, type: "wrong" }] },
+            { question: "7. Besar mana rasa kepedulian sayang kat b ni?", options: [{ text: "Besar Galaxy", score: 100, type: "correct" }, { text: "Separuh", score: 50, type: "half" }, { text: "Nape tanya", score: 0, type: "wrong" }] },
+            { question: "8. Pernah tak... sayang <strong>terpikir/imaginasi</strong> tentang \"masa depan\" dengan b tak?", options: [{ text: "Banyak sangattt", score: 100, type: "correct" }, { text: "Kadang\" je", score: 50, type: "half" }, { text: "Jarang", score: 0, type: "wrong" }] },
+            { question: "9. Berapa percent pentingnya b dalam hidup sayang?", options: [{ text: "25%", score: 0, type: "wrong" }, { text: "50%", score: 50, type: "half" }, { text: "75%", score: 50, type: "half" }, { text: "99.9%", score: 75, type: "correct" }, { text: "100%", score: 100, type: "correct" }] },
+            { question: "10. Sayang betul-betul cintakan b?", options: [{ text: "Dengan sepenuh hati b", score: 100, type: "correct" }, { text: "Mungkin", score: 50, type: "half" }, { text: "Tak yakinlah", score: 0, type: "wrong" }] }
         ];
         
         document.addEventListener('DOMContentLoaded', function() {
@@ -557,12 +495,11 @@
             const video = document.getElementById('specialVideo');
             const bgVolume = document.getElementById('bgVolume');
             const clickVolume = document.getElementById('clickVolume');
+            const loveHeart = document.getElementById('loveHeart');
             
-            // Set default volume
-            audio.volume = 0.75; // 75% untuk background music
-            clickSound.volume = 0.75; // 75% untuk click sound
+            audio.volume = 0.75;
+            clickSound.volume = 0.75;
             
-            // Volume slider event listeners
             bgVolume.addEventListener('input', function() {
                 audio.volume = this.value / 100;
                 if (audio.volume === 0) {
@@ -587,6 +524,7 @@
                     mainContent.style.display = 'block';
                     createSoftBackground(backgroundLayer);
                     audio.play();
+                    positionLoveHeart(); // Kedudukan awal hati
                 }, 500);
             });
 
@@ -604,6 +542,8 @@
                     document.getElementById('muteBtn').classList.remove('muted');
                 }
             });
+
+            window.addEventListener('resize', positionLoveHeart); // Sesuaikan kedudukan bila skrin resize
         });
         
         function createSoftBackground(layer) {
@@ -623,6 +563,37 @@
                 element.style.opacity = Math.random() * 0.4 + 0.2;
                 layer.appendChild(element);
             }
+        }
+        
+        function positionLoveHeart() {
+            const container = document.getElementById('mainContent');
+            const progressBar = document.getElementById('progressBar');
+            const loveHeart = document.getElementById('loveHeart');
+            
+            if (container.style.display === 'block') {
+                const containerRect = container.getBoundingClientRect();
+                const progressRect = progressBar.getBoundingClientRect();
+                
+                loveHeart.style.left = `${containerRect.right + 10}px`; // 10px dari hujung kanan container
+                loveHeart.style.top = `${progressRect.bottom}px`; // Hujung bawah progress bar
+            }
+        }
+        
+        function updateLoveHeart(percentage) {
+            const loveHeart = document.getElementById('loveHeart');
+            const maxSize = 40; // Saiz maksimum pada 40%
+            const minSize = 10; // Saiz minimum pada 0%
+            const growthRange = maxSize - minSize;
+            let size;
+            
+            if (percentage <= 40) {
+                size = minSize + (growthRange * (percentage / 40)); // Linear growth hingga 40%
+            } else {
+                size = maxSize; // Kekal pada saiz maksimum selepas 40%
+            }
+            
+            loveHeart.style.fontSize = `${size}px`;
+            loveHeart.style.transform = `translateY(-${percentage * 0.5}px)`; // Naik sedikit mengikut peratus
         }
         
         function disableOptions(questionNum) {
@@ -778,6 +749,8 @@
             
             progressBar.classList.add('shake-progress');
             setTimeout(() => progressBar.classList.remove('shake-progress'), 500);
+            
+            updateLoveHeart(percentage); // Kemas kini hati mengikut peratus
         }
         
         function showLoveLetter() {
@@ -793,9 +766,7 @@
             
             fetch('https://formspree.io/f/xqapwldd', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     email: 'mdanialarif07@gmail.com',
                     message: emailBody
