@@ -11,7 +11,7 @@
             line-height: 1.6;
             color: #333;
             margin: 0;
-            padding: 0;
+            padding: 20px; /* Ruang sekeliling */
             background-color: #fff5f5;
             position: relative;
             overflow-x: hidden;
@@ -27,7 +27,10 @@
             position: relative;
             z-index: 1;
             display: none;
-            margin: 20px;
+            max-width: 800px; /* Had lebar untuk desktop */
+            width: 100%; /* Responsive */
+            margin: 0 auto; /* Tengah mendatar */
+            /* Buang min-height, biar ikut kandungan */
         }
         .progress-container { width: 100%; background-color: #f3f3f3; border-radius: 20px; margin: 20px 0; overflow: hidden; }
         .progress-bar { height: 30px; background: linear-gradient(to right, #ff9a9e, #fad0c4); border-radius: 20px; width: 0%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; }
@@ -94,7 +97,8 @@
         .intro-overlay.fade-out { animation: fadeOut 0.5s ease-out forwards; }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; display: none; } }
         @media (max-width: 600px) {
-            .container { padding: 15px; margin: 10px; }
+            body { padding: 10px; }
+            .container { padding: 15px; }
             .progress-bar { height: 25px; font-size: 14px; }
             button, input[type="text"] { width: 90%; padding: 10px 15px; }
             .subtitle { font-size: 16px; }
