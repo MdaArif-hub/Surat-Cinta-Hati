@@ -43,8 +43,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0; /* Lapisan khusus untuk bunga & hati */
-            pointer-events: none; /* Pastikan tak ganggu interaksi */
+            z-index: 0;
+            pointer-events: none;
         }
         .progress-container { width: 100%; background-color: #f3f3f3; border-radius: 20px; margin: 15px 0; overflow: hidden; }
         .progress-bar { height: 25px; background: linear-gradient(to right, #ff9a9e, #fad0c4); border-radius: 20px; width: 0%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px; }
@@ -85,7 +85,7 @@
             color: #ff9a9e;
             animation: floatSoft 8s ease-in-out infinite;
             opacity: 0.5;
-            z-index: 0; /* Pastikan kekal di belakang */
+            z-index: 0;
             user-select: none;
             pointer-events: none;
         }
@@ -135,7 +135,7 @@
     </style>
 </head>
 <body>
-    <div class="background-layer" id="backgroundLayer"></div> <!-- Lapisan baru untuk bunga & hati -->
+    <div class="background-layer" id="backgroundLayer"></div>
 
     <div class="intro-overlay" id="introOverlay">
         <img src="images/kiss.gif" alt="Cute Kiss GIF" class="intro-gif">
@@ -372,7 +372,7 @@
                 setTimeout(() => {
                     introOverlay.style.display = 'none';
                     mainContent.style.display = 'block';
-                    createSoftBackground(backgroundLayer); // Tambah ke lapisan khusus
+                    createSoftBackground(backgroundLayer);
                 }, 500);
             });
         });
@@ -381,7 +381,7 @@
             const softSymbols = ['♥', '🌸', '🌼', '✿', '❀', '💗', '🌷', '💞'];
             const colors = ['#ff9a9e', '#fad0c4', '#ffcccb', '#ffb6c1', '#f8b8d0', '#f9d6e2'];
             
-            for (let i = 0; i < 20; i++) {
+            for (let i = 0; i < 70; i++) { // Tambah ke 70 untuk lebih bunga & hati
                 const element = document.createElement('div');
                 element.className = 'soft-element';
                 element.textContent = softSymbols[Math.floor(Math.random() * softSymbols.length)];
@@ -392,7 +392,7 @@
                 element.style.animationDelay = Math.random() * 3 + 's';
                 element.style.color = colors[Math.floor(Math.random() * colors.length)];
                 element.style.opacity = Math.random() * 0.4 + 0.2;
-                layer.appendChild(element); // Tambah ke background-layer, bukan body
+                layer.appendChild(element);
             }
         }
         
