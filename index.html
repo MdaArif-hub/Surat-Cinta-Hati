@@ -21,7 +21,7 @@
         h1 { color: #e74c3c; text-align: center; margin-bottom: 10px; font-size: 20px; }
         .subtitle { text-align: center; color: #666; margin-bottom: 20px; font-size: 14px; }
         .container {
-            background-color: #fffafa; /* Ubah dari white ke pink超cair */
+            background-color: #fffafa;
             padding: 20px;
             border-radius: 10px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
@@ -46,19 +46,78 @@
             z-index: 0;
             pointer-events: none;
         }
-        .progress-container { width: 100%; background-color: #f3f3f3; border-radius: 20px; margin: 15px 0; overflow: hidden; }
-        .progress-bar { height: 25px; background: linear-gradient(to right, #ff9a9e, #fad0c4); border-radius: 20px; width: 0%; transition: width 0.5s ease; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; font-size: 12px; }
+        .progress-container { 
+            width: 100%; 
+            background-color: #f3f3f3; 
+            border-radius: 20px; 
+            margin: 15px 0; 
+            overflow: hidden; 
+            position: relative; 
+        }
+        .progress-bar { 
+            height: 25px; 
+            border-radius: 20px; 
+            width: 0%; 
+            transition: width 0.5s ease; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white; 
+            font-weight: bold; 
+            font-size: 12px; 
+        }
+        .progress-bar.shake-progress { animation: shakeProgress 0.5s ease; }
+        @keyframes shakeProgress {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            50% { transform: translateX(3px); }
+            75% { transform: translateX(-3px); }
+            100% { transform: translateX(0); }
+        }
         .question { margin-bottom: 15px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; display: none; }
         .question.active { display: block; animation: fadeIn 0.5s ease; }
         .answer-options { display: flex; flex-direction: column; align-items: center; margin-top: 15px; }
-        button { background-color: #e74c3c; color: white; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; font-size: 14px; margin: 6px 0; transition: all 0.3s; width: 80%; max-width: 250px; position: relative; overflow: hidden; box-shadow: 0 3px 0 #c0392b; }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 6px 0;
+            transition: all 0.3s;
+            width: 80%;
+            max-width: 250px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 0 #c0392b;
+        }
+        button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            animation: shine 2s infinite;
+            pointer-events: none;
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            50% { transform: translateX(300%) rotate(45deg); }
+            100% { transform: translateX(300%) rotate(45deg); }
+        }
         button:disabled { background-color: #ccc; cursor: not-allowed; box-shadow: none; }
+        button:disabled::after { display: none; }
         button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 0 #c0392b; }
         button:active:not(:disabled) { transform: translateY(1px); box-shadow: 0 1px 0 #c0392b; }
         button.check-answers { background: linear-gradient(45deg, #ff9a9e, #fad0c4); color: #333; font-weight: bold; margin: 20px auto; display: block; width: 180px; box-shadow: 0 3px 0 #e0a7a7; }
         button.check-answers:hover { box-shadow: 0 5px 0 #e0a7a7; }
         button.check-answers:active { box-shadow: 0 1px 0 #e0a7a7; }
         button.close-review { background-color: #e74c3c; color: white; }
+        button.close-video { background-color: #e74c3c; color: white; margin-top: 10px; }
         input[type="text"] { padding: 10px; border: 2px solid #ff9a9e; border-radius: 25px; width: 80%; max-width: 250px; margin: 6px 0; font-size: 14px; text-align: center; transition: all 0.3s; }
         input[type="text"]:disabled { background-color: #f0f0f0; border-color: #ccc; }
         input[type="text"]:focus { outline: none; border-color: #e74c3c; box-shadow: 0 0 5px rgba(231, 76, 60, 0.5); }
@@ -108,18 +167,104 @@
             animation: fadeIn 1s ease-in;
             cursor: pointer;
         }
-        .intro-gif { width: 250px; height: auto; animation: popOut 0.5s ease-out 1s forwards; }
-        .intro-text { margin-top: 15px; font-size: 16px; color: #e74c3c; text-align: center; }
-        @keyframes popOut { 0% { transform: scale(0); } 80% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        .intro-gif { 
+            width: 250px; 
+            height: auto; 
+            animation: fadeIn 1s ease-in forwards; 
+        }
+        .intro-text { 
+            margin-top: 15px; 
+            font-size: 16px; 
+            color: #e74c3c; 
+            text-align: center; 
+            text-decoration: underline; 
+            opacity: 0; 
+            animation: popOut 0.5s ease-out 1.5s forwards; 
+        }
+        @keyframes popOut { 
+            0% { transform: scale(0); opacity: 0; } 
+            80% { transform: scale(1.1); opacity: 1; } 
+            100% { transform: scale(1); opacity: 1; } 
+        }
         .intro-overlay.fade-out { animation: fadeOut 0.5s ease-out forwards; }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; display: none; } }
+        .audio-control {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 20;
+            background-color: #ffffff;
+            color: #333;
+            border: 2px solid #e74c3c;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 0 #ccc;
+        }
+        .audio-control.muted {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+            box-shadow: 0 2px 0 #c0392b;
+        }
+        .audio-control:hover { transform: translateY(-2px); box-shadow: 0 4px 0 #ccc; }
+        .audio-control.muted:hover { box-shadow: 0 4px 0 #c0392b; }
+        .audio-control:active { transform: translateY(1px); box-shadow: 0 1px 0 #ccc; }
+        .audio-control.muted:active { box-shadow: 0 1px 0 #c0392b; }
+        .video-container { display: none; margin-top: 20px; text-align: center; }
+        .video-container video { width: 100%; max-width: 560px; height: 315px; border-radius: 8px; }
+        .play-video-btn { background-color: #ff9a9e; width: 180px; margin: 0 auto; }
+        /* Styling untuk Volume Sliders */
+        .volume-controls {
+            position: fixed;
+            top: 50px;
+            right: 10px;
+            z-index: 20;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .volume-control {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .volume-control label {
+            font-size: 12px;
+            margin-right: 5px;
+            color: #e74c3c;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100px;
+            height: 5px;
+            background: #f3f3f3;
+            border-radius: 5px;
+            outline: none;
+            transition: background 0.3s;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #e74c3c;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background: #e74c3c;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        input[type="range"]:hover { background: #ffcccc; }
         @media (max-width: 600px) {
             body { font-size: 16px; }
-            .container { 
-                padding: 15px; 
-                max-width: 90%; 
-                min-height: 33vh;
-            }
+            .container { padding: 15px; max-width: 90%; min-height: 33vh; }
             h1 { font-size: 22px; }
             .subtitle { font-size: 16px; }
             .progress-bar { height: 20px; font-size: 14px; }
@@ -131,15 +276,46 @@
             .soft-element { font-size: 16px; }
             .intro-gif { width: 200px; }
             .intro-text { font-size: 16px; }
+            .audio-control { padding: 6px 10px; font-size: 16px; }
+            .video-container video { height: 200px; }
+            .volume-controls { top: 40px; right: 5px; }
+            .volume-control label { font-size: 10px; }
+            input[type="range"] { width: 80px; }
         }
     </style>
 </head>
 <body>
     <div class="background-layer" id="backgroundLayer"></div>
 
+    <!-- Audio Background -->
+    <audio id="backgroundMusic" loop>
+        <source src="A Himitsu - I Should Let You Go (feat. Nori).mp3" type="audio/mp3">
+        Audio tidak disokong oleh pelayar anda.
+    </audio>
+    <!-- Audio untuk Kesan Bunyi -->
+    <audio id="errorSound">
+        <source src="error sound.mp3" type="audio/mp3">
+    </audio>
+    <audio id="clickSound">
+        <source src="normal click btn sound.mp3" type="audio/mp3">
+    </audio>
+    <button class="audio-control" id="muteBtn" onclick="toggleMute()">🔊</button>
+
+    <!-- Volume Controls -->
+    <div class="volume-controls">
+        <div class="volume-control">
+            <label for="bgVolume">BG Music:</label>
+            <input type="range" id="bgVolume" min="0" max="100" value="75">
+        </div>
+        <div class="volume-control">
+            <label for="clickVolume">Click:</label>
+            <input type="range" id="clickVolume" min="0" max="100" value="75">
+        </div>
+    </div>
+
     <div class="intro-overlay" id="introOverlay">
         <img src="images/kiss.gif" alt="Cute Kiss GIF" class="intro-gif">
-        <div class="intro-text">Tekan sahaja di mana-mana bahagian screen</div>
+        <div class="intro-text">Tekan sahaja di mana-mana bahagian skrin</div>
     </div>
 
     <div class="container" id="mainContent">
@@ -265,6 +441,15 @@
                     <p style="font-size: 18px;"><strong>love you sayangku</strong> 💓</p>
                 </div>
             </div>
+            <!-- Video Button & Container -->
+            <button class="play-video-btn" onclick="showVideo()">Main Video Istimewa 🎥</button>
+            <div class="video-container" id="videoContainer">
+                <video controls id="specialVideo">
+                    <source src="Happy Birthday - Ariana.mp4" type="video/mp4">
+                    Video tidak disokong oleh pelayar anda.
+                </video>
+                <button class="close-video" onclick="hideVideo()">Close</button>
+            </div>
         </div>
         
         <div class="copyright">
@@ -279,6 +464,7 @@
         const maxScore = 1000;
         let answers = [];
         let isSubmitted = false;
+        let wasMutedManually = false;
 
         const allQuestions = [
             {
@@ -366,6 +552,33 @@
             const introOverlay = document.getElementById('introOverlay');
             const mainContent = document.getElementById('mainContent');
             const backgroundLayer = document.getElementById('backgroundLayer');
+            const audio = document.getElementById('backgroundMusic');
+            const clickSound = document.getElementById('clickSound');
+            const video = document.getElementById('specialVideo');
+            const bgVolume = document.getElementById('bgVolume');
+            const clickVolume = document.getElementById('clickVolume');
+            
+            // Set default volume
+            audio.volume = 0.75; // 75% untuk background music
+            clickSound.volume = 0.75; // 75% untuk click sound
+            
+            // Volume slider event listeners
+            bgVolume.addEventListener('input', function() {
+                audio.volume = this.value / 100;
+                if (audio.volume === 0) {
+                    document.getElementById('muteBtn').textContent = '🔇';
+                    document.getElementById('muteBtn').classList.add('muted');
+                    wasMutedManually = true;
+                } else {
+                    document.getElementById('muteBtn').textContent = '🔊';
+                    document.getElementById('muteBtn').classList.remove('muted');
+                    wasMutedManually = false;
+                }
+            });
+            
+            clickVolume.addEventListener('input', function() {
+                clickSound.volume = this.value / 100;
+            });
             
             introOverlay.addEventListener('click', function() {
                 introOverlay.classList.add('fade-out');
@@ -373,7 +586,23 @@
                     introOverlay.style.display = 'none';
                     mainContent.style.display = 'block';
                     createSoftBackground(backgroundLayer);
+                    audio.play();
                 }, 500);
+            });
+
+            video.addEventListener('play', function() {
+                if (!wasMutedManually) {
+                    audio.muted = true;
+                    document.getElementById('muteBtn').textContent = '🔇';
+                    document.getElementById('muteBtn').classList.add('muted');
+                }
+            });
+            video.addEventListener('pause', function() {
+                if (!wasMutedManually) {
+                    audio.muted = false;
+                    document.getElementById('muteBtn').textContent = '🔊';
+                    document.getElementById('muteBtn').classList.remove('muted');
+                }
             });
         });
         
@@ -406,6 +635,7 @@
         function selectAnswer(questionNum, score, button, type) {
             if (isSubmitted) return;
             
+            document.getElementById('clickSound').play();
             const buttons = button.parentElement.querySelectorAll('button');
             buttons.forEach(btn => btn.className = '');
             button.classList.add(type);
@@ -446,14 +676,16 @@
             const inputField = document.getElementById('colorAnswer');
             
             if (!answer) {
+                document.getElementById('errorSound').play();
+                if (navigator.vibrate) navigator.vibrate(200);
                 submitButton.className = '';
                 submitButton.classList.add('wrong');
                 inputField.classList.add('shake');
-                if (navigator.vibrate) navigator.vibrate(200);
                 setTimeout(() => inputField.classList.remove('shake'), 500);
                 return;
             }
             
+            document.getElementById('clickSound').play();
             let score = 0;
             let type = 'wrong';
             
@@ -495,14 +727,16 @@
             const inputField = document.getElementById('dateAnswer');
             
             if (!answer) {
+                document.getElementById('errorSound').play();
+                if (navigator.vibrate) navigator.vibrate(200);
                 submitButton.className = '';
                 submitButton.classList.add('wrong');
                 inputField.classList.add('shake');
-                if (navigator.vibrate) navigator.vibrate(200);
                 setTimeout(() => inputField.classList.remove('shake'), 500);
                 return;
             }
             
+            document.getElementById('clickSound').play();
             let score = 0;
             let type = 'wrong';
             
@@ -537,8 +771,13 @@
         function updateProgressBar() {
             const percentage = Math.min(Math.round((totalScore / maxScore) * 100), 100);
             const progressBar = document.getElementById('progressBar');
+            
             progressBar.style.width = percentage + '%';
-            progressBar.textContent = percentage + '%';
+            progressBar.style.background = `linear-gradient(to right, #ff9a9e 0%, #f4b7b1 ${percentage / 2}%, #e74c3c ${percentage}%)`;
+            progressBar.textContent = `${percentage}%`;
+            
+            progressBar.classList.add('shake-progress');
+            setTimeout(() => progressBar.classList.remove('shake-progress'), 500);
         }
         
         function showLoveLetter() {
@@ -568,6 +807,7 @@
         }
         
         function showReview() {
+            document.getElementById('clickSound').play();
             const reviewContent = document.getElementById('reviewContent');
             reviewContent.innerHTML = '';
             
@@ -593,9 +833,71 @@
         }
         
         function hideReview() {
+            document.getElementById('clickSound').play();
             document.getElementById('reviewContainer').style.display = 'none';
             document.getElementById('reviewBtn').style.display = 'block';
             document.getElementById('loveLetter').style.display = 'block';
+        }
+
+        function toggleMute() {
+            document.getElementById('clickSound').play();
+            const audio = document.getElementById('backgroundMusic');
+            const muteBtn = document.getElementById('muteBtn');
+            const bgVolume = document.getElementById('bgVolume');
+            
+            if (audio.muted) {
+                audio.muted = false;
+                muteBtn.textContent = '🔊';
+                muteBtn.classList.remove('muted');
+                bgVolume.value = audio.volume * 100;
+                wasMutedManually = false;
+            } else {
+                audio.muted = true;
+                muteBtn.textContent = '🔇';
+                muteBtn.classList.add('muted');
+                bgVolume.value = 0;
+                wasMutedManually = true;
+            }
+        }
+
+        function showVideo() {
+            document.getElementById('clickSound').play();
+            const videoContainer = document.getElementById('videoContainer');
+            const playBtn = document.querySelector('.play-video-btn');
+            const video = document.getElementById('specialVideo');
+            const audio = document.getElementById('backgroundMusic');
+            const muteBtn = document.getElementById('muteBtn');
+            
+            videoContainer.style.display = 'block';
+            playBtn.style.display = 'none';
+            video.play();
+            if (!wasMutedManually) {
+                audio.muted = true;
+                muteBtn.textContent = '🔇';
+                muteBtn.classList.add('muted');
+            }
+            videoContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideVideo() {
+            document.getElementById('clickSound').play();
+            const videoContainer = document.getElementById('videoContainer');
+            const playBtn = document.querySelector('.play-video-btn');
+            const video = document.getElementById('specialVideo');
+            const audio = document.getElementById('backgroundMusic');
+            const muteBtn = document.getElementById('muteBtn');
+            const bgVolume = document.getElementById('bgVolume');
+            
+            videoContainer.style.display = 'none';
+            playBtn.style.display = 'block';
+            video.pause();
+            if (!wasMutedManually) {
+                audio.muted = false;
+                muteBtn.textContent = '🔊';
+                muteBtn.classList.remove('muted');
+                bgVolume.value = audio.volume * 100;
+            }
+            document.getElementById('loveLetter').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
