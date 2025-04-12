@@ -1,4 +1,771 @@
-<script>
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="Surat cinta interaktif untuk pasangan tersayang">
+    <title>Surat Cinta untukmu | Ekspresi Perasaan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Caveat&family=Roboto&family=Playfair+Display&family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Dancing Script', cursive;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            background-color: #fff5f5;
+            position: relative;
+            overflow-x: hidden;
+            touch-action: manipulation;
+            font-size: 14px;
+        }
+        h1 { color: #e74c3c; text-align: center; margin-bottom: 10px; font-size: 20px; }
+        .subtitle { text-align: center; color: #666; margin-bottom: 20px; font-size: 14px; }
+        .container {
+            background-color: #fffafa;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            display: none;
+            max-width: 700px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            min-height: 33vh;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .container.fade-in { opacity: 1; }
+        .background-layer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        .progress-container { 
+            width: 100%; 
+            background-color: #f3f3f3; 
+            border-radius: 20px; 
+            margin: 15px 0; 
+            overflow: hidden; 
+            position: relative; 
+        }
+        .progress-bar { 
+            height: 25px; 
+            border-radius: 20px; 
+            width: 0%; 
+            transition: width 0.5s ease; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            color: white; 
+            font-weight: bold; 
+            font-size: 12px; 
+        }
+        .progress-bar.shake-progress { animation: shakeProgress 0.5s ease; }
+        @keyframes shakeProgress {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-3px); }
+            50% { transform: translateX(3px); }
+            75% { transform: translateX(-3px); }
+            100% { transform: translateX(0); }
+        }
+        .love-heart {
+            position: absolute;
+            color: #e74c3c;
+            font-size: 10px;
+            z-index: 15;
+            transition: font-size 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+        }
+        .question { margin-bottom: 15px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; display: none; }
+        .question.active { display: block; animation: fadeIn 0.5s ease; }
+        .question h3 { font-family: 'Arial'; }
+        .answer-options { display: flex; flex-direction: column; align-items: center; margin-top: 15px; }
+        button {
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            margin: 6px 0;
+            transition: all 0.3s;
+            width: 80%;
+            max-width: 250px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 0 #c0392b;
+        }
+        button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -100%;
+            width: 50%;
+            height: 200%;
+            background: linear-gradient(120deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+            animation: shine 2s infinite;
+            pointer-events: none;
+        }
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            50% { transform: translateX(300%) rotate(45deg); }
+            100% { transform: translateX(300%) rotate(45deg); }
+        }
+        button:disabled { background-color: #ccc; cursor: not-allowed; box-shadow: none; }
+        button:disabled::after { display: none; }
+        button:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 0 #c0392b; }
+        button:active:not(:disabled) { transform: translateY(1px); box-shadow: 0 1px 0 #c0392b; }
+        button.check-answers { background: linear-gradient(45deg, #ff9a9e, #fad0c4); color: #333; font-weight: bold; margin: 20px auto; display: block; width: 180px; box-shadow: 0 3px 0 #e0a7a7; }
+        button.check-answers:hover { box-shadow: 0 5px 0 #e0a7a7; }
+        button.check-answers:active { box-shadow: 0 1px 0 #e0a7a7; }
+        button.close-review, button.close-video { background-color: #e74c3c; color: white; margin-top: 10px; }
+        input[type="text"] { padding: 10px; border: 2px solid #ff9a9e; border-radius: 25px; width: 80%; max-width: 250px; margin: 6px 0; font-size: 14px; text-align: center; transition: all 0.3s; }
+        input[type="text"]:disabled { background-color: #f0f0f0; border-color: #ccc; }
+        input[type="text"]:focus { outline: none; border-color: #e74c3c; box-shadow: 0 0 5px rgba(231, 76, 60, 0.5); }
+        .shake { animation: shakeCustom 0.8s ease; border-color: #e74c3c !important; box-shadow: 0 0 10px rgba(231, 76, 60, 0.5) !important; }
+        @keyframes shakeCustom {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(5px); }
+        }
+        .love-letter { display: none; padding: 15px; background-color: #fff; border: 1px solid #ffcccc; border-radius: 8px; margin-top: 15px; text-align: center; }
+        .love-letter h2 { color: #e74c3c; }
+        .love-letter p { margin-bottom: 10px; }
+        .signature { margin-top: 20px; text-align: right; }
+        .copyright { margin-top: 40px; font-size: 10px; text-align: center; color: #999; line-height: 1.8; font-family: 'Arial', sans-serif; }
+        .review-container { display: none; margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; font-family: 'Arial', sans-serif; }
+        .review-container h3 { font-family: 'Arial', sans-serif; }
+        .review-question { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd; font-family: 'Arial', sans-serif; }
+        .review-answer { margin-left: 15px; position: relative; padding-left: 20px; margin-bottom: 5px; font-family: 'Arial', sans-serif; }
+        .review-answer::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px; font-weight: bold; }
+        .review-correct::before { background-color: #2ecc71; content: '✓'; }
+        .review-half::before { background-color: #3498db; content: '~'; }
+        .review-wrong::before { background-color: #e74c3c; content: '✗'; }
+        .review-selected { font-weight: bold; border-left: 3px solid #e74c3c; padding-left: 17px; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+        .heart { color: #e74c3c; font-size: 20px; }
+        .soft-element, .heart-splash {
+            position: absolute;
+            font-size: 18px;
+            color: #ff9a9e;
+            animation: floatSoft 8s ease-in-out infinite;
+            opacity: 0.5;
+            z-index: 0;
+            user-select: none;
+            pointer-events: none;
+        }
+        @keyframes floatSoft {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        @keyframes splash {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+        .soft-emoji {
+            position: absolute;
+            font-size: 18px;
+            color: #ff9a9e;
+            opacity: 0.5;
+            z-index: 0;
+            user-select: none;
+            pointer-events: none;
+        }
+        .love-effect {
+            position: absolute;
+            font-size: 20px;
+            color: #ff9a9e;
+            pointer-events: none;
+            z-index: 50;
+            animation: floatLove 1.5s ease-out forwards;
+        }
+        @keyframes floatLove {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-50px); }
+        }
+        .sparkle {
+            position: absolute;
+            font-size: 16px;
+            color: #ff9a9e;
+            z-index: 90;
+            pointer-events: none;
+            opacity: 1;
+        }
+        @keyframes sparkle {
+            0% { opacity: 1; transform: translateX(0) translateY(0); }
+            50% { opacity: 0.8; }
+            100% { opacity: 0; transform: translateY(-50vh); }
+        }
+        .intro-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 245, 245, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            z-index: 100;
+            text-align: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .intro-overlay.active { opacity: 1; }
+        .intro-overlay.fade-out { opacity: 0; }
+        .intro-title { 
+            position: absolute; 
+            top: 25% !important; 
+            width: 100%;
+            font-family: 'Great Vibes';
+            font-size: 48px;
+            color: #e74c3c;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+        }
+        .intro-subtitle { 
+            position: absolute; 
+            top: 32% !important; 
+            width: 100%;
+            font-family: 'Caveat';
+            font-size: 36px;
+            color: #ff9a9e;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+        }
+        .intro-gif { 
+            position: absolute; 
+            top: 50% !important; 
+            width: 250px; 
+            height: auto; 
+            opacity: 0; 
+            transition: opacity 1s ease; 
+        }
+        .intro-gif.float-up { 
+            animation: floatUpIntro 1s ease-out forwards; 
+        }
+        .intro-text { 
+            position: absolute; 
+            top: 75%; 
+            width: 100%;
+            font-family: 'Roboto';
+            font-size: 16px;
+            color: #ff9a9e;
+            opacity: 0;
+            text-decoration: underline;
+            transition: opacity 0.5s ease;
+        }
+        .intro-heart-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 90;
+            pointer-events: none;
+        }
+        @keyframes floatUpIntro {
+            0% { top: 50%; opacity: 1; }
+            100% { top: 40%; opacity: 1; }
+        }
+        @keyframes floatUpText {
+            0% { opacity: 0; transform: translateY(0); }
+            100% { opacity: 1; transform: translateY(-10%); }
+        }
+        .float-up-text { animation: floatUpText 1s ease-out forwards; }
+        @keyframes popOut {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2) translateY(-20px); }
+            100% { transform: scale(1); }
+        }
+        .intro-text.pop-out, .lock-text.pop-out { animation: popOut 1s ease-in-out; }
+        .intro-text.shake-text, .lock-text.shake-text { animation: shakeCustom 0.8s ease; }
+        .finish-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 245, 245, 0.95);
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            text-align: center;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .finish-overlay.active { opacity: 1; display: flex; }
+        .finish-overlay.fade-out { opacity: 0; }
+        .finish-gif { 
+            width: 250px; 
+            height: auto; 
+            opacity: 0; 
+            position: absolute; 
+            top: 50%; 
+            transition: opacity 0.5s ease; 
+        }
+        .finish-gif.float-up { 
+            animation: floatUp 1s ease-out forwards; 
+        }
+        .finish-text, .countdown, .lock-text {
+            position: absolute;
+            width: 100%;
+            color: #e74c3c;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .finish-text#finishText { 
+            top: 40%; 
+            font-family: 'Times New Roman';
+            font-size: 24px;
+            color: #e74c3c;
+        }
+        .finish-text#readyText { 
+            top: 55%; 
+            font-family: 'Dancing Script';
+            font-size: 20px;
+            color: #ff9a9e;
+        }
+        .countdown { 
+            top: 60%; 
+            font-family: 'Playfair Display';
+            font-size: 40px;
+            color: #e74c3c;
+        }
+        .countdown.arrow { font-size: 60px; }
+        .lock-text { 
+            top: 75%; 
+            font-family: 'Roboto';
+            font-size: 16px;
+            color: #ff9a9e;
+            text-decoration: underline;
+        }
+        @keyframes floatUp {
+            0% { top: 50%; opacity: 1; }
+            100% { top: 15%; opacity: 1; }
+        }
+        .heart-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 90;
+            pointer-events: none;
+        }
+        .cover-overlay { 
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 245, 245, 0.95);
+            z-index: 99;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .cover-overlay.active { display: block; opacity: 1; }
+        .cover-overlay.fade-out { opacity: 0; }
+        .lock-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 245, 245, 0.95);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 200;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .lock-overlay.active { opacity: 1; }
+        .lock-overlay.fade-out { opacity: 0; }
+        .lock-title {
+            font-family: 'Great Vibes';
+            font-size: 36px;
+            color: #e74c3c;
+            margin-bottom: 20px;
+        }
+        .lock-display {
+            font-family: 'Arial';
+            font-size: 24px;
+            color: #333;
+            background-color: #fff;
+            padding: 10px 20px;
+            border: 2px solid #ff9a9e;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            min-width: 100px;
+            text-align: center;
+        }
+        .lock-buttons {
+            display: grid;
+            grid-template-columns: repeat(3, 60px);
+            gap: 10px;
+        }
+        .lock-btn {
+            background-color: #ff9a9e;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 50%;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 0 #e0a7a7;
+        }
+        .lock-btn:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 5px 0 #e0a7a7; }
+        .lock-btn:active:not(:disabled) { transform: translateY(1px); box-shadow: 0 1px 0 #e0a7a7; }
+        .lock-btn:disabled { background-color: #ccc; cursor: not-allowed; box-shadow: none; }
+        .lock-status {
+            font-family: 'Roboto';
+            font-size: 16px;
+            color: #e74c3c;
+            margin-top: 20px;
+        }
+        .audio-controls-container {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            z-index: 20;
+            background-color: #ffffff;
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .audio-control {
+            background-color: #ffffff;
+            color: #333;
+            border: 2px solid #e74c3c;
+            padding: 4px 6px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            box-shadow: 0 2px 0 #ccc;
+            margin-bottom: 8px;
+        }
+        .audio-control.muted {
+            background-color: #e74c3c;
+            color: white;
+            border-color: #c0392b;
+            box-shadow: 0 2px 0 #c0392b;
+        }
+        .audio-control:hover { transform: translateY(-2px); box-shadow: 0 4px 0 #ccc; }
+        .audio-control.muted:hover { box-shadow: 0 4px 0 #c0392b; }
+        .audio-control:active { transform: translateY(1px); box-shadow: 0 1px 0 #ccc; }
+        .audio-control.muted:active { box-shadow: 0 1px 0 #c0392b; }
+        .video-container { display: none; margin-top: 20px; text-align: center; }
+        .video-container video { width: 100%; max-width: 560px; height: 315px; border-radius: 8px; }
+        .play-video-btn { background-color: #ff9a9e; width: 180px; margin: 0 auto; }
+        .volume-control {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+        .volume-control label {
+            font-size: 12px;
+            margin-right: 5px;
+            color: #e74c3c;
+        }
+        input[type="range"] {
+            -webkit-appearance: none;
+            width: 100px;
+            height: 5px;
+            background: #f3f3f3;
+            border-radius: 5px;
+            outline: none;
+            transition: background 0.3s;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 15px;
+            height: 15px;
+            background: #e74c3c;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        input[type="range"]::-moz-range-thumb {
+            width: 15px;
+            height: 15px;
+            background: #e74c3c;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        input[type="range"]:hover { background: #ffcccc; }
+        @media (max-width: 600px) {
+            body { font-size: 16px; }
+            .container { padding: 15px; max-width: 90%; min-height: 33vh; }
+            h1 { font-size: 22px; }
+            .subtitle { font-size: 16px; }
+            .progress-bar { height: 20px; font-size: 14px; }
+            button { padding: 10px 15px; font-size: 16px; max-width: 220px; }
+            input[type="text"] { padding: 10px; font-size: 16px; max-width: 220px; }
+            .love-letter h2 { font-size: 18px; }
+            .love-letter p { font-size: 16px; }
+            .copyright { margin-top: 30px; font-size: 10px; }
+            .soft-element { font-size: 16px; }
+            .intro-gif { width: 200px; }
+            .intro-title { font-size: 40px; top: 25% !important; }
+            .intro-subtitle { font-size: 30px; top: 32% !important; }
+            .intro-text { font-size: 14px; top: 75%; }
+            .finish-gif { width: 200px; }
+            .finish-text#finishText { font-size: 20px; top: 40%; }
+            .finish-text#readyText { font-size: 18px; top: 55%; }
+            .countdown { font-size: 36px; top: 60%; }
+            .countdown.arrow { font-size: 54px; }
+            .lock-text { font-size: 14px; top: 75%; }
+            .audio-controls-container { top: 5px; right: 5px; padding: 6px; }
+            .audio-control { padding: 4px 6px; font-size: 14px; margin-bottom: 6px; }
+            .video-container video { height: 200px; }
+            .volume-control label { font-size: 10px; }
+            .lock-title { font-size: 30px; }
+            .lock-display { font-size: 20px; }
+            .lock-btn { padding: 12px; font-size: 16px; }
+            .lock-status { font-size: 14px; }
+            input[type="range"] { width: 80px; }
+            .love-heart { font-size: 8px; }
+            .sparkle { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="background-layer" id="backgroundLayer"></div>
+    <div class="love-heart" id="loveHeart">❤</div>
+
+    <audio id="backgroundMusic" loop>
+        <source src="A Himitsu - I Should Let You Go (feat. Nori).mp3" type="audio/mp3">
+    </audio>
+    <audio id="birthdayMusic" loop>
+        <source src="HAPPY BIRTHDAY song - Smooth Jazz music for Birthday party.mp3" type="audio/mp3">
+    </audio>
+    <audio id="welcomeSound" loop>
+        <source src="Welcome Song.mp3" type="audio/mp3">
+    </audio>
+    <audio id="awardsSound" loop>
+        <source src="Awards Music.mp3" type="audio/mp3">
+    </audio>
+    <audio id="clickSound">
+        <source src="normal click btn sound.mp3" type="audio/mp3">
+    </audio>
+
+    <div class="audio-controls-container">
+        <button class="audio-control" id="muteBtn" onclick="toggleMute()">🔊</button>
+        <div class="volume-control">
+            <label for="bgVolume">BG Music:</label>
+            <input type="range" id="bgVolume" min="0" max="100" value="75">
+        </div>
+        <div class="volume-control">
+            <label for="clickVolume">Click:</label>
+            <input type="range" id="clickVolume" min="0" max="100" value="75">
+        </div>
+    </div>
+
+    <div class="lock-overlay" id="lockOverlay">
+        <div class="lock-title">Masukkan PIN</div>
+        <div class="lock-display" id="lockDisplay"></div>
+        <div class="lock-buttons">
+            <button class="lock-btn" onclick="enterPin(1)">1</button>
+            <button class="lock-btn" onclick="enterPin(2)">2</button>
+            <button class="lock-btn" onclick="enterPin(3)">3</button>
+            <button class="lock-btn" onclick="enterPin(4)">4</button>
+            <button class="lock-btn" onclick="enterPin(5)">5</button>
+            <button class="lock-btn" onclick="enterPin(6)">6</button>
+            <button class="lock-btn" onclick="enterPin(7)">7</button>
+            <button class="lock-btn" onclick="enterPin(8)">8</button>
+            <button class="lock-btn" onclick="enterPin(9)">9</button>
+            <button class="lock-btn" onclick="backspacePin()" style="grid-column: 1;">⌫</button>
+            <button class="lock-btn" onclick="enterPin(0)" style="grid-column: 2;">0</button>
+            <button class="lock-btn" onclick="submitPin()" style="grid-column: 3;">➡</button>
+        </div>
+        <div class="lock-status" id="lockStatus">Masukkan 4 nombor PIN</div>
+    </div>
+
+    <div class="intro-overlay" id="introOverlay">
+        <div class="intro-heart-layer" id="introHeartLayer"></div>
+        <div class="intro-title" id="introTitle"></div>
+        <div class="intro-subtitle" id="introSubtitle"></div>
+        <img src="images/kiss.gif" alt="Cute Kiss GIF" class="intro-gif">
+        <div class="intro-text" id="introText"></div>
+    </div>
+
+    <div class="finish-overlay" id="finishOverlay">
+        <div class="heart-layer" id="heartLayer"></div>
+        <img src="images/yeay finish.gif" alt="Yeay Finish GIF" class="finish-gif">
+        <div class="finish-text" id="finishText"></div>
+        <div class="finish-text" id="readyText"></div>
+        <div class="countdown" id="countdown"></div>
+        <div class="lock-text" id="lockText"></div>
+    </div>
+
+    <div class="cover-overlay" id="coverOverlay"></div>
+
+    <div class="container" id="mainContent">
+        <h1>Seberapa nilai percent cinta kita? <span class="heart">❤</span></h1>
+        <p class="subtitle">Jawablah beberapa soalan yang disediakan ni dengan jujur iya sayang</p>
+        
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
+        
+        <div class="question active" id="question1">
+            <h3>1. Sayang... sayangkan b?</h3>
+            <div class="answer-options">
+                <button onclick="selectAnswer(1, 100, this, 'correct')">Mestilah sayang</button>
+                <button onclick="selectAnswer(1, 0, this, 'wrong')">Hurmm</button>
+            </div>
+        </div>
+        
+        <div class="question" id="question2">
+            <h3>2. Apa warna favourite b?</h3>
+            <div class="answer-options">
+                <input type="text" id="colorAnswer" placeholder="Tulis warna di sini" onkeypress="handleEnter(event, checkColorAnswer)">
+                <button id="submitColor" onclick="checkColorAnswer()">Hantar</button>
+            </div>
+        </div>
+        
+        <div class="question" id="question3">
+            <h3>3. Favorite makanan yang b suka apa?</h3>
+            <div class="answer-options">
+                <button onclick="selectAnswer(3, 50, this, 'half')">Nasi goreng cina</button>
+                <button onclick="selectAnswer(3, 75, this, 'correct')">Nasi goreng kampung + telur mata goyang</button>
+                <button onclick="selectAnswer(3, 75, this, 'correct')">Kuey teow kungfu</button>
+                <button onclick="selectAnswer(3, 100, this, 'correct')">Nasi goreng pattaya</button>
+            </div>
+        </div>
+        
+        <div class="question" id="question4">
+            <h3>4. Bila kita mula mulakan bibit cinta?</h3>
+            <div class="answer-options">
+                <input type="text" id="dateAnswer" placeholder="Tulis tarikh di sini" onkeypress="handleEnter(event, checkDateAnswer)">
+                <button id="submitDate" onclick="checkDateAnswer()">Hantar</button>
+            </div>
+        </div>
+        
+        <div class="question" id="question5">
+            <h3>5. Suka ke tengok b senyum?</h3>
+            <div class="answer-options">
+                <button onclick="selectAnswer(5, 0, this, 'wrong')">Tak</button>
+                <button onclick="selectAnswer(5, 100, this, 'correct')">Sebab nampak hensem</button>
+                <button onclick="selectAnswer(5, 100, this, 'correct')">100% sukee gilerrr</button>
+            </div>
+        </div>
+        
+        <div class="question" id="question6">
+            <h3>6. Selalu tak sayang pikirkan b?</h3>
+            <div class="answer-options">
+                <button onclick="selectAnswer(6, 100, this, 'correct')">Iya sayangku</button>
+                <button onclick="selectAnswer(6, 50, this, 'half')">Bila teringat je</button>
+                <button onclick="selectAnswer(6, 0, this, 'wrong')">Hm takk..</button>
+            </div>
+        </div>
+        
+        <div class="question" id="question7">
+            <h3>7. Besar mana rasa kepedulian sayang kat b ni?</h3>
+            <div class="answer-options">
+                <button onclick="selectAnswer(7, 100, this, 'correct')">Besar Galaxy</button>
+                <button onclick="selectAnswer(7, 50, this, 'half')">Separuh</button>
+                <button onclick="selectAnswer(7, 0, this, 'wrong')">Nape tanya</button>
+            </div>
+        </div>
+        
+        <div class="question" id="question8">
+            <h3>8. Pernah tak... sayang <strong>terpikir/imaginasi</strong> tentang "masa depan" dengan b tak?</h3>
+            <div class="answer-options">
+                <button onclick="selectAnswer(8, 100, this, 'correct')">Banyak sangattt</button>
+                <button onclick="selectAnswer(8, 50, this, 'half')">Kadang" je</button>
+                <button onclick="selectAnswer(8, 0, this, 'wrong')">Jarang</button>
+            </div>
+        </div>
+        
+        <div class="question" id="question9">
+            <h3>9. Berapa percent pentingnya b dalam hidup sayang?</h3>
+            <div class="answer-options">
+                <button onclick="selectAnswer(9, 0, this, 'wrong')">25%</button>
+                <button onclick="selectAnswer(9, 50, this, 'half')">50%</button>
+                <button onclick="selectAnswer(9, 50, this, 'half')">75%</button>
+                <button onclick="selectAnswer(9, 75, this, 'correct')">99.9%</button>
+                <button onclick="selectAnswer(9, 100, this, 'correct')">100%</button>
+            </div>
+        </div>
+        
+        <div class="question" id="question10">
+            <h3>10. Sayang betul-betul cintakan b?</h3>
+            <div class="answer-options">
+                <button onclick="selectAnswer(10, 100, this, 'correct')">Dengan sepenuh hati b</button>
+                <button onclick="selectAnswer(10, 50, this, 'half')">Mungkin</button>
+                <button onclick="selectAnswer(10, 0, this, 'wrong')">Tak yakinlah</button>
+            </div>
+        </div>
+        
+        <div style="display: flex; justify-content: center;">
+            <button class="check-answers" onclick="showReview()" id="reviewBtn" style="display:none;">Periksa Jawapan Tadi</button>
+        </div>
+        
+        <div class="review-container" id="reviewContainer">
+            <h3>Semakan Jawapan Tadi</h3>
+            <div id="reviewContent"></div>
+            <button class="close-review" onclick="hideReview()">Tutup Semakan</button>
+        </div>
+        
+        <div class="love-letter" id="loveLetter">
+            <h2 style="font-family: 'Great Vibes'; font-size: 24px; color: #e74c3c;">Untukmu Sayangku... 🌸</h2>
+            <p style="font-family: 'Times New Roman'; font-size: 20px; color: #ff9a9e;">Thankyou sayangku 🫶🏻💕</p>
+            <p style="font-family: 'Dancing Script'; font-size: 16px; color: #666;">Apapun hasil dari percent dari jawapan ini, cukuplah kita berusaha untuk jadi lebih terbaik di masa hadapan 🌟</p>
+            <h2 style="font-family: 'Roboto'; font-size: 18px; color: #e74c3c;">Mana yang terkurang, boleh diusaha. Yang perfect, ditambahkan lagi! ✨</h2>
+            <p style="font-family: 'Times New Roman'; font-size: 20px; color: #ff9a9e;">Thankyou sayang... sebab dah bersama dengan b, selama ratusan ribuan tahunan saatan sehingga kinian.. masih tetap berdiri tegak pacak di sisi b.. 💞</p>
+            <p style="font-family: 'Arial'; font-size: 20px; color: #333;">InshaAllah masukkan dalam doa kita berdua, <strong style="color: #e74c3c;">"Semoga Allah merestui dan memberikan kita berdua berjalan bersama dari pelaminan nikah, menjadi mempelai mahligai di dunia, dan akhirnya bersatu di singgahsana syurga."</strong> 🙏🏻🌹</p>
+            <p style="font-family: 'Dancing Script'; font-size: 18px; color: #333;">Semoga kita sama-sama bahagia selamanya, hingga ke syurga-Nya, <strong style="color: #e74c3c;">aamin</strong> 🤲🏻🌙🕊️</p>
+            <p style="font-family: 'Times New Roman'; font-size: 16px; color: #555; font-style: italic;">"Selamat Harijadi buah hati b ini yang <strong style="color: #e74c3c;">ke-20</strong>, semoga sentiasa menjadi anak yang solehah, sentiasa berusaha menjadi lagi terbaik dari yang terbaik! b sama-sama doakan kesejahteraan, keselamatan, kebahagiaan kita berdua bermula dari sekarang.. sehingga la di kemudian hari, <strong style="color: #e74c3c;">aamin YA Rabbal A'lamin</strong> 🤲🏻"</p>
+            <div class="signature">
+                <p style="font-family: 'Dancing Script'; font-size: 14px; color: #666; font-style: italic;">~ sekian dari usaha b yang tidak ternilai ini ~ 🌼</p>
+                <p style="font-family: 'Roboto'; font-size: 22px; color: #e74c3c;">💖🐻</p>
+                <p style="font-family: 'Roboto'; font-size: 17px; color: #333; font-style: normal;"><strong>love you sayangku</strong> 💓</p>
+            </div>
+            <button class="play-video-btn" onclick="showVideo()">Main Video Istimewa 🎥</button>
+            <div class="video-container" id="videoContainer">
+                <video controls loop id="specialVideo">
+                    <source src="Happy Birthday - Ariana.mp4" type="video/mp4">
+                    Video tidak disokong oleh pelayar anda.
+                </video>
+                <button class="close-video" onclick="hideVideo()">Close</button>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            Copyright ©️ mdanialarif07@gmail.com<br>
+            #Arifanaksulung, #BabybecarAriana
+        </div>
+    </div>
+
+    <script>
         let currentQuestion = 1;
         let totalScore = 0;
         const maxScore = 1000;
@@ -643,10 +1410,11 @@
             createLoveEffect(event);
             const videoContainer = document.getElementById('videoContainer');
             const playBtn = document.querySelector('.play-video-btn');
-            const specialVideo = document.getElementById('specialVideo');
-            specialVideo.pause();
+            const video = document.getElementById('specialVideo');
             videoContainer.style.display = 'none';
             playBtn.style.display = 'block';
+            video.pause();
+            if (!wasMutedManually) document.getElementById('birthdayMusic').play();
             document.getElementById('loveLetter').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
