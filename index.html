@@ -5,40 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="Surat cinta interaktif untuk pasangan tersayang">
     <title>Surat Cinta untukmu | Ekspresi Perasaan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Great+Vibes&family=Caveat&family=Roboto&family=Playfair+Display&family=Times+New+Roman&family=Arial&display=swap" rel="stylesheet">
     <style>
-        /* Muat font lokal dari folder fonts/ */
-        @font-face {
-            font-family: 'Caveat';
-            src: url('fonts/Caveat-Regular.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'Dancing Script';
-            src: url('fonts/DancingScript-Regular.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'Great Vibes';
-            src: url('fonts/GreatVibes-Regular.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'Playfair Display';
-            src: url('fonts/PlayfairDisplay-Regular.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
-        @font-face {
-            font-family: 'Roboto';
-            src: url('fonts/Roboto-Regular.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
-        }
         body {
-            font-family: 'Dancing Script', Arial, sans-serif;
+            font-family: 'Dancing Script', cursive;
             line-height: 1.6;
             color: #333;
             margin: 0;
@@ -118,7 +88,7 @@
         }
         .question { margin-bottom: 15px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; display: none; }
         .question.active { display: block; animation: fadeIn 0.5s ease; }
-        .question h3 { font-family: 'Arial', sans-serif; }
+        .question h3 { font-family: 'Arial'; }
         .answer-options { display: flex; flex-direction: column; align-items: center; margin-top: 15px; }
         button {
             background-color: #e74c3c;
@@ -176,65 +146,15 @@
         .love-letter p { margin-bottom: 10px; }
         .signature { margin-top: 20px; text-align: right; }
         .copyright { margin-top: 40px; font-size: 10px; text-align: center; color: #999; line-height: 1.8; font-family: 'Arial', sans-serif; }
-        .review-container {
-            display: none;
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            font-family: 'Arial', sans-serif;
-        }
-        .review-container h3 {
-            font-family: 'Arial', sans-serif;
-            font-size: 18px;
-            color: #e74c3c;
-        }
-        .review-question {
-            margin-bottom: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ddd;
-            font-family: 'Arial', sans-serif;
-        }
-        .review-answer {
-            margin-left: 15px;
-            position: relative;
-            padding-left: 20px;
-            margin-bottom: 5px;
-            font-family: 'Arial', sans-serif;
-        }
-        .review-answer::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 10px;
-            font-weight: bold;
-        }
-        .review-correct::before {
-            background-color: #2ecc71;
-            content: '✓';
-        }
-        .review-half::before {
-            background-color: #3498db;
-            content: '~';
-        }
-        .review-wrong::before {
-            background-color: #e74c3c;
-            content: '✗';
-        }
-        .review-selected {
-            font-weight: bold;
-            border-left: 3px solid #e74c3c;
-            padding-left: 17px;
-        }
+        .review-container { display: none; margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 8px; font-family: 'Arial', sans-serif; }
+        .review-container h3 { font-family: 'Arial', sans-serif; }
+        .review-question { margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid #ddd; font-family: 'Arial', sans-serif; }
+        .review-answer { margin-left: 15px; position: relative; padding-left: 20px; margin-bottom: 5px; font-family: 'Arial', sans-serif; }
+        .review-answer::before { content: ''; position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 10px; font-weight: bold; }
+        .review-correct::before { background-color: #2ecc71; content: '✓'; }
+        .review-half::before { background-color: #3498db; content: '~'; }
+        .review-wrong::before { background-color: #e74c3c; content: '✗'; }
+        .review-selected { font-weight: bold; border-left: 3px solid #e74c3c; padding-left: 17px; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
         .heart { color: #e74c3c; font-size: 20px; }
@@ -313,7 +233,7 @@
             position: absolute; 
             top: 25% !important; 
             width: 100%;
-            font-family: 'Great Vibes', Georgia, serif;
+            font-family: 'Great Vibes';
             font-size: 48px;
             color: #e74c3c;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
@@ -323,7 +243,7 @@
             position: absolute; 
             top: 32% !important; 
             width: 100%;
-            font-family: 'Caveat', cursive;
+            font-family: 'Caveat';
             font-size: 36px;
             color: #ff9a9e;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
@@ -344,7 +264,7 @@
             position: absolute; 
             top: 75%; 
             width: 100%;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Roboto';
             font-size: 16px;
             color: #ff9a9e;
             opacity: 0;
@@ -415,26 +335,26 @@
         }
         .finish-text#finishText { 
             top: 40%; 
-            font-family: 'Times New Roman', serif;
+            font-family: 'Times New Roman';
             font-size: 24px;
             color: #e74c3c;
         }
         .finish-text#readyText { 
             top: 55%; 
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Dancing Script';
             font-size: 20px;
             color: #ff9a9e;
         }
         .countdown { 
             top: 60%; 
-            font-family: 'Playfair Display', serif;
+            font-family: 'Playfair Display';
             font-size: 40px;
             color: #e74c3c;
         }
         .countdown.arrow { font-size: 60px; }
         .lock-text { 
             top: 75%; 
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Roboto';
             font-size: 16px;
             color: #ff9a9e;
             text-decoration: underline;
@@ -485,13 +405,13 @@
         .lock-overlay.active { opacity: 1; }
         .lock-overlay.fade-out { opacity: 0; }
         .lock-title {
-            font-family: 'Great Vibes', Georgia, serif;
+            font-family: 'Great Vibes';
             font-size: 36px;
             color: #e74c3c;
             margin-bottom: 20px;
         }
         .lock-display {
-            font-family: 'Arial', sans-serif;
+            font-family: 'Arial';
             font-size: 24px;
             color: #333;
             background-color: #fff;
@@ -522,7 +442,7 @@
         .lock-btn:active:not(:disabled) { transform: translateY(1px); box-shadow: 0 1px 0 #e0a7a7; }
         .lock-btn:disabled { background-color: #ccc; cursor: not-allowed; box-shadow: none; }
         .lock-status {
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Roboto';
             font-size: 16px;
             color: #e74c3c;
             margin-top: 20px;
@@ -816,18 +736,18 @@
         </div>
         
         <div class="love-letter" id="loveLetter">
-            <h2 style="font-family: 'Great Vibes', Georgia, serif; font-size: 24px; color: #e74c3c;">Untukmu Sayangku... 🌸</h2>
-            <p style="font-family: 'Times New Roman', serif; font-size: 20px; color: #ff9a9e;">Thankyou sayangku 🫶🏻💕</p>
-            <p style="font-family: 'Dancing Script', cursive; font-size: 16px; color: #666;">Apapun hasil dari percent dari jawapan ini, cukuplah kita berusaha untuk jadi lebih terbaik di masa hadapan 🌟</p>
-            <h2 style="font-family: 'Roboto', sans-serif; font-size: 18px; color: #e74c3c;">Mana yang terkurang, boleh diusaha. Yang perfect, ditambahkan lagi! ✨</h2>
-            <p style="font-family: 'Times New Roman', serif; font-size: 20px; color: #ff9a9e;">Thankyou sayang... sebab dah bersama dengan b, selama ratusan ribuan tahunan saatan sehingga kinian.. masih tetap berdiri tegak pacak di sisi b.. 💞</p>
-            <p style="font-family: 'Arial', sans-serif; font-size: 20px; color: #333;">InshaAllah masukkan dalam doa kita berdua, <strong style="color: #e74c3c;">"Semoga Allah merestui dan memberikan kita berdua berjalan bersama dari pelaminan nikah, menjadi mempelai mahligai di dunia, dan akhirnya bersatu di singgahsana syurga."</strong> 🙏🏻🌹</p>
-            <p style="font-family: 'Dancing Script', cursive; font-size: 18px; color: #333;">Semoga kita sama-sama bahagia selamanya, hingga ke syurga-Nya, <strong style="color: #e74c3c;">aamin</strong> 🤲🏻🌙🕊️</p>
-            <p style="font-family: 'Times New Roman', serif; font-size: 16px; color: #555; font-style: italic;">"Selamat Harijadi buah hati b ini yang <strong style="color: #e74c3c;">ke-20</strong>, semoga sentiasa menjadi anak yang solehah, sentiasa berusaha menjadi lagi terbaik dari yang terbaik! b sama-sama doakan kesejahteraan, keselamatan, kebahagiaan kita berdua bermula dari sekarang.. sehingga la di kemudian hari, <strong style="color: #e74c3c;">aamin YA Rabbal A'lamin</strong> 🤲🏻"</p>
+            <h2 style="font-family: 'Great Vibes'; font-size: 24px; color: #e74c3c;">Untukmu Sayangku... 🌸</h2>
+            <p style="font-family: 'Times New Roman'; font-size: 20px; color: #ff9a9e;">Thankyou sayangku 🫶🏻💕</p>
+            <p style="font-family: 'Dancing Script'; font-size: 16px; color: #666;">Apapun hasil dari percent dari jawapan ini, cukuplah kita berusaha untuk jadi lebih terbaik di masa hadapan 🌟</p>
+            <h2 style="font-family: 'Roboto'; font-size: 18px; color: #e74c3c;">Mana yang terkurang, boleh diusaha. Yang perfect, ditambahkan lagi! ✨</h2>
+            <p style="font-family: 'Times New Roman'; font-size: 20px; color: #ff9a9e;">Thankyou sayang... sebab dah bersama dengan b, selama ratusan ribuan tahunan saatan sehingga kinian.. masih tetap berdiri tegak pacak di sisi b.. 💞</p>
+            <p style="font-family: 'Arial'; font-size: 20px; color: #333;">InshaAllah masukkan dalam doa kita berdua, <strong style="color: #e74c3c;">"Semoga Allah merestui dan memberikan kita berdua berjalan bersama dari pelaminan nikah, menjadi mempelai mahligai di dunia, dan akhirnya bersatu di singgahsana syurga."</strong> 🙏🏻🌹</p>
+            <p style="font-family: 'Dancing Script'; font-size: 18px; color: #333;">Semoga kita sama-sama bahagia selamanya, hingga ke syurga-Nya, <strong style="color: #e74c3c;">aamin</strong> 🤲🏻🌙🕊️</p>
+            <p style="font-family: 'Times New Roman'; font-size: 16px; color: #555; font-style: italic;">"Selamat Harijadi buah hati b ini yang <strong style="color: #e74c3c;">ke-20</strong>, semoga sentiasa menjadi anak yang solehah, sentiasa berusaha menjadi lagi terbaik dari yang terbaik! b sama-sama doakan kesejahteraan, keselamatan, kebahagiaan kita berdua bermula dari sekarang.. sehingga la di kemudian hari, <strong style="color: #e74c3c;">aamin YA Rabbal A'lamin</strong> 🤲🏻"</p>
             <div class="signature">
-                <p style="font-family: 'Dancing Script', cursive; font-size: 14px; color: #666; font-style: italic;">~ sekian dari usaha b yang tidak ternilai ini ~ 🌼</p>
-                <p style="font-family: 'Roboto', sans-serif; font-size: 22px; color: #e74c3c;">💖🐻</p>
-                <p style="font-family: 'Roboto', sans-serif; font-size: 17px; color: #333; font-style: normal;"><strong>love you sayangku</strong> 💓</p>
+                <p style="font-family: 'Dancing Script'; font-size: 14px; color: #666; font-style: italic;">~ sekian dari usaha b yang tidak ternilai ini ~ 🌼</p>
+                <p style="font-family: 'Roboto'; font-size: 22px; color: #e74c3c;">💖🐻</p>
+                <p style="font-family: 'Roboto'; font-size: 17px; color: #333; font-style: normal;"><strong>love you sayangku</strong> 💓</p>
             </div>
             <button class="play-video-btn" onclick="showVideo()">Main Video Istimewa 🎥</button>
             <div class="video-container" id="videoContainer">
@@ -856,7 +776,7 @@
         let sparkleLoop;
         let pinInput = [];
         let attemptsLeft = 3;
-        const correctPin = "5210";
+        const correctPin = "5210"; // PIN: 5210
 
         const allQuestions = [
             { question: "1. Sayang... sayangkan b?", options: [{ text: "Mestilah sayang", score: 100, type: "correct" }, { text: "Hurmm", score: 0, type: "wrong" }] },
@@ -899,7 +819,7 @@
             lockOverlay.classList.add('active');
 
             bgVolume.addEventListener('input', function() {
-                const activeMusic = mainContent.style.display === 'block' ? backgroundMusic : birthdayMusic;
+                const activeMusic = document.getElementById('loveLetter').style.display === 'block' ? birthdayMusic : backgroundMusic;
                 activeMusic.volume = this.value / 100;
                 if (activeMusic.volume === 0) {
                     document.getElementById('muteBtn').textContent = '🔇';
@@ -925,7 +845,7 @@
                         mainContent.style.display = 'block';
                         mainContent.classList.add('fade-in');
                         createSoftBackground(backgroundLayer);
-                        backgroundMusic.play();
+                        if (!wasMutedManually) backgroundMusic.play();
                         positionLoveHeart();
                     }, 500);
                 }
@@ -944,21 +864,19 @@
                         mainContent.style.display = 'block';
                         mainContent.classList.add('fade-in');
                         showLoveLetter();
-                        birthdayMusic.play();
+                        if (!wasMutedManually) birthdayMusic.play();
                     }, 1500);
                 }
             });
 
             video.addEventListener('play', function() {
-                if (!wasMutedManually) {
-                    birthdayMusic.muted = true;
-                    document.getElementById('muteBtn').textContent = '🔇';
-                    document.getElementById('muteBtn').classList.add('muted');
-                }
+                birthdayMusic.pause();
+                document.getElementById('muteBtn').textContent = '🔇';
+                document.getElementById('muteBtn').classList.add('muted');
             });
             video.addEventListener('pause', function() {
                 if (!wasMutedManually) {
-                    birthdayMusic.muted = false;
+                    birthdayMusic.play();
                     document.getElementById('muteBtn').textContent = '🔊';
                     document.getElementById('muteBtn').classList.remove('muted');
                 }
@@ -1360,7 +1278,7 @@
             createLoveEffect(event);
             let score = 0;
             let type = 'wrong';
-            const datePattern = /(19\s*(th)?\s*(disember|december|dis|dec|12)(\s*(2022|22))?|(19)[./-]\s*(12|dis|dec)(\s*[./-]?\s*(2022|22))?)/i;
+            const datePattern = /(19\s*(th)?\s*(disember|december|dis|dec)(\s*(2022|22))?|(19)[./-]\s*(12|dis|dec)(\s*[./-]?\s*(2022|22))?)/i;
             if (datePattern.test(answer)) { score = 100; type = 'correct'; }
             
             submitButton.className = '';
@@ -1377,101 +1295,127 @@
         }
 
         function updateProgressBar() {
+            const percentage = Math.min(Math.round((totalScore / maxScore) * 100), 100);
             const progressBar = document.getElementById('progressBar');
-            const percentage = Math.min((totalScore / maxScore) * 100, 100);
-            progressBar.style.width = `${percentage}%`;
-            progressBar.textContent = `${Math.round(percentage)}%`;
-            updateLoveHeart(percentage);
+            progressBar.style.width = percentage + '%';
             if (percentage < 30) {
-                progressBar.style.background = 'linear-gradient(90deg, #e74c3c, #c0392b)';
+                progressBar.style.background = '#e74c3c';
             } else if (percentage < 60) {
-                progressBar.style.background = 'linear-gradient(90deg, #ff9a9e, #e74c3c)';
+                progressBar.style.background = '#ff9a9e';
             } else if (percentage < 80) {
-                progressBar.style.background = 'linear-gradient(90deg, #3498db, #2980b9)';
+                progressBar.style.background = '#3498db';
             } else {
-                progressBar.style.background = 'linear-gradient(90deg, #2ecc71, #27ae60)';
+                progressBar.style.background = '#2ecc71';
             }
-        }
-
-        function showReview() {
-            const reviewContainer = document.getElementById('reviewContainer');
-            const reviewContent = document.getElementById('reviewContent');
-            reviewContent.innerHTML = '';
-            answers.forEach((ans, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.className = 'review-question';
-                questionDiv.innerHTML = `<strong>${ans.question}</strong>`;
-                const answerDiv = document.createElement('div');
-                answerDiv.className = `review-answer review-${ans.type} ${ans.type === 'correct' || ans.type === 'half' || ans.type === 'wrong' ? 'review-selected' : ''}`;
-                answerDiv.textContent = `Jawapan anda: ${ans.answer}`;
-                questionDiv.appendChild(answerDiv);
-                allQuestions[index].options.forEach(opt => {
-                    if (opt.text !== ans.answer && (opt.type === 'correct' || opt.score > ans.score)) {
-                        const correctAnswer = document.createElement('div');
-                        correctAnswer.className = 'review-answer review-correct';
-                        correctAnswer.textContent = `Pilihan betul: ${opt.text}`;
-                        questionDiv.appendChild(correctAnswer);
-                    }
-                });
-                reviewContent.appendChild(questionDiv);
-            });
-            reviewContainer.style.display = 'block';
-        }
-
-        function hideReview() {
-            document.getElementById('reviewContainer').style.display = 'none';
+            progressBar.textContent = `${percentage}%`;
+            progressBar.classList.add('shake-progress');
+            setTimeout(() => progressBar.classList.remove('shake-progress'), 500);
+            updateLoveHeart(percentage);
         }
 
         function showLoveLetter() {
-            document.getElementById('loveLetter').style.display = 'block';
-            document.getElementById('mainContent').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function showVideo() {
-            document.getElementById('videoContainer').style.display = 'block';
-            document.getElementById('specialVideo').play();
-        }
-
-        function hideVideo() {
-            const video = document.getElementById('specialVideo');
-            video.pause();
-            document.getElementById('videoContainer').style.display = 'none';
-            if (!wasMutedManually) {
-                document.getElementById('birthdayMusic').muted = false;
-                document.getElementById('muteBtn').textContent = '🔊';
-                document.getElementById('muteBtn').classList.remove('muted');
-            }
-        }
-
-        function toggleMute() {
-            const backgroundMusic = document.getElementById('backgroundMusic');
-            const birthdayMusic = document.getElementById('birthdayMusic');
-            const welcomeSound = document.getElementById('welcomeSound');
-            const awardsSound = document.getElementById('awardsSound');
-            const muteBtn = document.getElementById('muteBtn');
-            wasMutedManually = !wasMutedManually;
-            if (wasMutedManually) {
-                backgroundMusic.muted = true;
-                birthdayMusic.muted = true;
-                welcomeSound.muted = true;
-                awardsSound.muted = true;
-                muteBtn.textContent = '🔇';
-                muteBtn.classList.add('muted');
-            } else {
-                backgroundMusic.muted = false;
-                birthdayMusic.muted = false;
-                welcomeSound.muted = false;
-                awardsSound.muted = false;
-                muteBtn.textContent = '🔊';
-                muteBtn.classList.remove('muted');
-            }
+            const loveLetter = document.getElementById('loveLetter');
+            loveLetter.style.display = 'block';
+            loveLetter.scrollIntoView({ behavior: 'smooth' });
         }
 
         function sendEmail() {
-            const percentage = Math.round((totalScore / maxScore) * 100);
-            const subject = encodeURIComponent("Hasil Kuiz Cinta Kita");
-            const body = encodeURIComponent(`Sayangku, saya dah selesaikan kuiz cinta kita! Skor saya ialah ${percentage}%.\n\nBerikut adalah jawapan saya:\n${answers.map((ans, i) => `${i+1}. ${ans.question}\n   Jawapan: ${ans.answer} (${ans.type === 'correct' ? 'Betul' : ans.type === 'half' ? 'Separuh' : 'Salah'})`).join('\n')}\n\nDari hati saya untuk awak, \n[Your Name]`);
-            window.location.href = `mailto:mdanialarif07@gmail.com?subject=${subject}&body=${body}`;
+            const emailBody = answers.map((ans, index) => 
+                `${index + 1}. ${ans.question}\n   Jawapan: ${ans.answer} (${ans.score} markah)`
+            ).join('\n\n') + `\n\nJumlah Skor: ${totalScore}/${maxScore} (${Math.round((totalScore / maxScore) * 100)}%)`;
+            
+            fetch('https://formspree.io/f/xqapwldd', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email: 'mdanialarif07@gmail.com', message: emailBody })
+            }).then(response => {
+                if (response.ok) console.log('Email sent successfully');
+                else console.error('Failed to send email');
+            }).catch(error => console.error('Error:', error));
+        }
+
+        function showReview() {
+            document.getElementById('clickSound').play();
+            createLoveEffect(event);
+            const reviewContent = document.getElementById('reviewContent');
+            reviewContent.innerHTML = '';
+            allQuestions.forEach((q, index) => {
+                const qDiv = document.createElement('div');
+                qDiv.className = 'review-question';
+                qDiv.innerHTML = `<strong>${q.question}</strong>`;
+                q.options.forEach(option => {
+                    const isSelected = answers[index] && answers[index].answer === option.text;
+                    const aDiv = document.createElement('div');
+                    aDiv.className = `review-answer review-${option.type}${isSelected ? ' review-selected' : ''}`;
+                    aDiv.innerHTML = `${option.text} (${option.score} markah)`;
+                    qDiv.appendChild(aDiv);
+                });
+                reviewContent.appendChild(qDiv);
+            });
+            document.getElementById('reviewContainer').style.display = 'block';
+            document.getElementById('reviewBtn').style.display = 'none';
+            document.getElementById('loveLetter').style.display = 'none';
+        }
+
+        function hideReview() {
+            document.getElementById('clickSound').play();
+            createLoveEffect(event);
+            const reviewContainer = document.getElementById('reviewContainer');
+            const reviewBtn = document.getElementById('reviewBtn');
+            const loveLetter = document.getElementById('loveLetter');
+            reviewContainer.style.display = 'none';
+            reviewBtn.style.display = 'block';
+            loveLetter.style.display = 'block';
+        }
+
+        function toggleMute() {
+            document.getElementById('clickSound').play();
+            createLoveEffect(event);
+            const backgroundMusic = document.getElementById('backgroundMusic');
+            const birthdayMusic = document.getElementById('birthdayMusic');
+            const muteBtn = document.getElementById('muteBtn');
+            const bgVolume = document.getElementById('bgVolume');
+            const activeMusic = document.getElementById('loveLetter').style.display === 'block' ? birthdayMusic : backgroundMusic;
+            
+            if (activeMusic.paused || activeMusic.muted) {
+                activeMusic.muted = false;
+                activeMusic.play();
+                muteBtn.textContent = '🔊';
+                muteBtn.classList.remove('muted');
+                bgVolume.value = activeMusic.volume * 100;
+                wasMutedManually = false;
+            } else {
+                activeMusic.muted = true;
+                activeMusic.pause();
+                muteBtn.textContent = '🔇';
+                muteBtn.classList.add('muted');
+                bgVolume.value = 0;
+                wasMutedManually = true;
+            }
+        }
+
+        function showVideo() {
+            document.getElementById('clickSound').play();
+            createLoveEffect(event);
+            const videoContainer = document.getElementById('videoContainer');
+            const playBtn = document.querySelector('.play-video-btn');
+            videoContainer.style.display = 'block';
+            playBtn.style.display = 'none';
+            document.getElementById('specialVideo').play();
+            videoContainer.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function hideVideo() {
+            document.getElementById('clickSound').play();
+            createLoveEffect(event);
+            const videoContainer = document.getElementById('videoContainer');
+            const playBtn = document.querySelector('.play-video-btn');
+            const video = document.getElementById('specialVideo');
+            videoContainer.style.display = 'none';
+            playBtn.style.display = 'block';
+            video.pause();
+            if (!wasMutedManually) document.getElementById('birthdayMusic').play();
+            document.getElementById('loveLetter').scrollIntoView({ behavior: 'smooth' });
         }
     </script>
 </body>
