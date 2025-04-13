@@ -524,6 +524,17 @@
         .video-container { display: none; margin-top: 20px; text-align: center; }
         .video-container video { width: 100%; max-width: 560px; height: 315px; border-radius: 8px; }
         .play-video-btn { background-color: #ff9a9e; width: 180px; margin: 0 auto; }
+        .video-buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .video-buttons .play-video-btn {
+            margin: 5px 0;
+            background-color: #ff9a9e;
+            width: 200px;
+        }
         .volume-control {
             display: flex;
             align-items: center;
@@ -593,6 +604,9 @@
             .love-heart { font-size: 8px; }
             .sparkle { font-size: 14px; }
             .floating-circle { width: 16px; height: 16px; font-size: 10px; }
+            .video-buttons .play-video-btn {
+                width: 180px;
+            }
         }
     </style>
 </head>
@@ -774,174 +788,179 @@
             <button class="close-review" onclick="hideReview()">Tutup Semakan</button>
         </div>
 <div class="love-letter" id="loveLetter">
-            <h2 style="font-family: 'Great Vibes'; font-size: 24px; color: #e74c3c;">Untukmu Sayangku... 🌸</h2>
-            <p style="font-family: 'Times New Roman'; font-size: 20px; color: #ff9a9e;">Thankyou sayangku 🫶🏻💕</p>
-            <p style="font-family: 'Dancing Script'; font-size: 16px; color: #666;">Apapun hasil dari percent dari jawapan ini, cukuplah kita berusaha untuk jadi lebih terbaik di masa hadapan 🌟</p>
-            <h2 style="font-family: 'Roboto'; font-size: 18px; color: #e74c3c;">Mana yang terkurang, boleh diusaha. Yang perfect, ditambahkan lagi! ✨</h2>
-            <p style="font-family: 'Times New Roman'; font-size: 20px; color: #ff9a9e;">Thankyou sayang... sebab dah bersama dengan b, selama ratusan ribuan tahunan saatan sehingga kinian.. masih tetap berdiri tegak pacak di sisi b.. 💞</p>
-            <p style="font-family: 'Arial'; font-size: 20px; color: #333;">InshaAllah masukkan dalam doa kita berdua, <strong style="color: #e74c3c;">"Semoga Allah merestui dan memberikan kita berdua berjalan bersama dari pelaminan nikah, menjadi mempelai mahligai di dunia, dan akhirnya bersatu di singgahsana syurga."</strong> 🙏🏻🌹</p>
-            <p style="font-family: 'Dancing Script'; font-size: 18px; color: #333;">Semoga kita sama-sama bahagia selamanya, hingga ke syurga-Nya, <strong style="color: #e74c3c;">aamin</strong> 🤲🏻🌙🕊️</p>
-            <p style="font-family: 'Times New Roman'; font-size: 16px; color: #555; font-style: italic;">"Selamat Harijadi buah hati b ini yang <strong style="color: #e74c3c;">ke-20</strong> sempena pada tarikh 24 April 2025, semoga sentiasa menjadi anak yang solehah, sentiasa berusaha menjadi lagi terbaik dari yang terbaik! b sama-sama doakan kesejahteraan, keselamatan, kebahagiaan kita berdua bermula dari sekarang.. sehingga la di kemudian hari, <strong style="color: #e74c3c;">aamin YA Rabbal A'lamin</strong> 🤲🏻"</p>
-            <div class="signature">
-                <p style="font-family: 'Dancing Script'; font-size: 14px; color: #666; font-style: italic;">~ sekian dari usaha b yang tidak ternilai ini ~ 🌼</p>
-                <p style="font-family: 'Roboto'; font-size: 22px; color: #e74c3c;">💖🐻</p>
-                <p style="font-family: 'Roboto'; font-size: 17px; color: #333; font-style: normal;"><strong>love you sayangku</strong> 💓</p>
-            </div>
-            <button class="play-video-btn" onclick="showVideo()">Main Video Istimewa 🎥</button>
-            <div class="video-container" id="videoContainer">
-                <video controls loop id="specialVideo">
-                    <source src="Happy Birthday - Ariana.mp4" type="video/mp4">
-                    Video tidak disokong oleh pelayar anda.
-                </video>
-                <button class="close-video" onclick="hideVideo()">Close</button>
-            </div>
-        </div>
-        
-        <div class="copyright">
-            Copyright ©️ mdanialarif07@gmail.com<br>
-            #Arifanaksulung, #BabybecarAriana
-        </div>
+    <h2 style="font-family: 'Great Vibes'; font-size: 24px; color: #e74c3c;">Untukmu Sayangku... 🌸</h2>
+    <p style="font-family: 'Times New Roman'; font-size: 20px; color: #ff9a9e;">Thankyou sayangku 🫶🏻💕</p>
+    <p style="font-family: 'Dancing Script'; font-size: 16px; color: #666;">Apapun hasil dari percent dari jawapan ini, cukuplah kita berusaha untuk jadi lebih terbaik di masa hadapan 🌟</p>
+    <h2 style="font-family: 'Roboto'; font-size: 18px; color: #e74c3c;">Mana yang terkurang, boleh diusaha. Yang perfect, ditambahkan lagi! ✨</h2>
+    <p style="font-family: 'Times New Roman'; font-size: 20px; color: #ff9a9e;">Thankyou sayang... sebab dah bersama dengan b, selama ratusan ribuan tahunan saatan sehingga kinian.. masih tetap berdiri tegak pacak di sisi b.. 💞</p>
+    <p style="font-family: 'Arial'; font-size: 20px; color: #333;">InshaAllah masukkan dalam doa kita berdua, <strong style="color: #e74c3c;">"Semoga Allah merestui dan memberikan kita berdua berjalan bersama dari pelaminan nikah, menjadi mempelai mahligai di dunia, dan akhirnya bersatu di singgahsana syurga."</strong> 🙏🏻🌹</p>
+    <p style="font-family: 'Dancing Script'; font-size: 18px; color: #333;">Semoga kita sama-sama bahagia selamanya, hingga ke syurga-Nya, <strong style="color: #e74c3c;">aamin</strong> 🤲🏻🌙🕊️</p>
+    <p style="font-family: 'Times New Roman'; font-size: 16px; color: #555; font-style: italic;">"Selamat Harijadi buah hati b ini yang <strong style="color: #e74c3c;">ke-20</strong> sempena pada tarikh 24 April 2025, semoga sentiasa menjadi anak yang solehah, sentiasa berusaha menjadi lagi terbaik dari yang terbaik! b sama-sama doakan kesejahteraan, keselamatan, kebahagiaan kita berdua bermula dari sekarang.. sehingga la di kemudian hari, <strong style="color: #e74c3c;">aamin YA Rabbal A'lamin</strong> 🤲🏻"</p>
+    <div class="signature">
+        <p style="font-family: 'Dancing Script'; font-size: 14px; color: #666; font-style: italic;">~ sekian dari usaha b yang tidak ternilai ini ~ 🌼</p>
+        <p style="font-family: 'Roboto'; font-size: 22px; color: #e74c3c;">💖🐻</p>
+        <p style="font-family: 'Roboto'; font-size: 17px; color: #333; font-style: normal;"><strong>love you sayangku</strong> 💓</p>
     </div>
+    <div class="video-buttons">
+        <button class="play-video-btn" onclick="showVideo(1)">Video Istimewa 1 🎉</button>
+        <button class="play-video-btn" onclick="showVideo(2)">Video Istimewa 2 🌸</button>
+        <button class="play-video-btn" onclick="showVideo(3)">Video Istimewa 3 💖</button>
+        <button class="play-video-btn" onclick="showVideo(4)">Video Istimewa 4 🎂</button>
+    </div>
+    <div class="video-container" id="videoContainer">
+        <video controls loop id="specialVideo">
+            <source id="videoSource" src="" type="video/mp4">
+            Video tidak disokong oleh pelayar anda.
+        </video>
+        <button class="close-video" onclick="hideVideo()">Close</button>
+    </div>
+</div>
 
-    <script>
-        let currentQuestion = 1;
-        let totalScore = 0;
-        const maxScore = 1000;
-        let answers = [];
-        let isSubmitted = false;
-        let wasMutedManually = false;
-        let heartLoop;
-        let sparkleLoop;
-        let pinInput = [];
-        let attemptsLeft = 3;
-        const correctPin = "5210"; // PIN: 5210
+<div class="copyright">
+    Copyright ©️ mdanialarif07@gmail.com<br>
+    #Arifanaksulung, #BabybecarAriana
+</div>
+</div>
 
-        const allQuestions = [
-            { question: "1. Sayang... sayangkan b?", options: [{ text: "Mestilah sayang", score: 100, type: "correct" }, { text: "Hurmm", score: 0, type: "wrong" }] },
-            { question: "2. Apa warna favourite b?", options: [{ text: "biru", score: 100, type: "correct" }, { text: "hitam", score: 75, type: "correct" }] },
-            { question: "3. Favorite makanan yang b suka apa?", options: [{ text: "Nasi goreng cina", score: 50, type: "half" }, { text: "Nasi goreng kampung + telur mata goyang", score: 75, type: "correct" }, { text: "Kuey teow kungfu", score: 75, type: "correct" }, { text: "Nasi goreng pattaya", score: 100, type: "correct" }] },
-            { question: "4. Bila kita mula mulakan bibit cinta?", options: [{ text: "19 Disember 2022", score: 100, type: "correct" }] },
-            { question: "5. Suka ke tengok b senyum?", options: [{ text: "Tak", score: 0, type: "wrong" }, { text: "Sebab nampak hensem", score: 100, type: "correct" }, { text: "100% sukee gilerrr", score: 100, type: "correct" }] },
-            { question: "6. Selalu tak sayang pikirkan b?", options: [{ text: "Iya sayangku", score: 100, type: "correct" }, { text: "Bila teringat je", score: 50, type: "half" }, { text: "Hm takk..", score: 0, type: "wrong" }] },
-            { question: "7. Besar mana rasa kepedulian sayang kat b ni?", options: [{ text: "Besar Galaxy", score: 100, type: "correct" }, { text: "Separuh", score: 50, type: "half" }, { text: "Nape tanya", score: 0, type: "wrong" }] },
-            { question: "8. Pernah tak... sayang <strong>terpikir/imaginasi</strong> tentang \"masa depan\" dengan b tak?", options: [{ text: "Banyak sangattt", score: 100, type: "correct" }, { text: "Kadang\" je", score: 50, type: "half" }, { text: "Jarang", score: 0, type: "wrong" }] },
-            { question: "9. Berapa percent pentingnya b dalam hidup sayang?", options: [{ text: "25%", score: 0, type: "wrong" }, { text: "50%", score: 50, type: "half" }, { text: "75%", score: 50, type: "half" }, { text: "99.9%", score: 75, type: "correct" }, { text: "100%", score: 100, type: "correct" }] },
-            { question: "10. Sayang betul-betul cintakan b?", options: [{ text: "Dengan sepenuh hati b", score: 100, type: "correct" }, { text: "Mungkin", score: 50, type: "half" }, { text: "Tak yakinlah", score: 0, type: "wrong" }] }
-        ];
+<script>
+    let currentQuestion = 1;
+    let totalScore = 0;
+    const maxScore = 1000;
+    let answers = [];
+    let isSubmitted = false;
+    let wasMutedManually = false;
+    let heartLoop;
+    let sparkleLoop;
+    let pinInput = [];
+    let attemptsLeft = 3;
+    const correctPin = "5210"; // PIN: 5210
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const lockOverlay = document.getElementById('lockOverlay');
-            const introOverlay = document.getElementById('introOverlay');
-            const finishOverlay = document.getElementById('finishOverlay');
-            const coverOverlay = document.getElementById('coverOverlay');
-            const mainContent = document.getElementById('mainContent');
-            const backgroundLayer = document.getElementById('backgroundLayer');
-            const backgroundMusic = document.getElementById('backgroundMusic');
-            const birthdayMusic = document.getElementById('birthdayMusic');
-            const welcomeSound = document.getElementById('welcomeSound');
-            const awardsSound = document.getElementById('awardsSound');
-            const clickSound = document.getElementById('clickSound');
-            const video = document.getElementById('specialVideo');
-            const bgVolume = document.getElementById('bgVolume');
-            const clickVolume = document.getElementById('clickVolume');
-            const introGif = document.querySelector('.intro-gif');
-            const introTitle = document.getElementById('introTitle');
-            const introSubtitle = document.getElementById('introSubtitle');
-            const introText = document.getElementById('introText');
-            const introHeartLayer = document.getElementById('introHeartLayer');
+    const allQuestions = [
+        { question: "1. Sayang... sayangkan b?", options: [{ text: "Mestilah sayang", score: 100, type: "correct" }, { text: "Hurmm", score: 0, type: "wrong" }] },
+        { question: "2. Apa warna favourite b?", options: [{ text: "biru", score: 100, type: "correct" }, { text: "hitam", score: 75, type: "correct" }] },
+        { question: "3. Favorite makanan yang b suka apa?", options: [{ text: "Nasi goreng cina", score: 50, type: "half" }, { text: "Nasi goreng kampung + telur mata goyang", score: 75, type: "correct" }, { text: "Kuey teow kungfu", score: 75, type: "correct" }, { text: "Nasi goreng pattaya", score: 100, type: "correct" }] },
+        { question: "4. Bila kita mula mulakan bibit cinta?", options: [{ text: "19 Disember 2022", score: 100, type: "correct" }] },
+        { question: "5. Suka ke tengok b senyum?", options: [{ text: "Tak", score: 0, type: "wrong" }, { text: "Sebab nampak hensem", score: 100, type: "correct" }, { text: "100% sukee gilerrr", score: 100, type: "correct" }] },
+        { question: "6. Selalu tak sayang pikirkan b?", options: [{ text: "Iya sayangku", score: 100, type: "correct" }, { text: "Bila teringat je", score: 50, type: "half" }, { text: "Hm takk..", score: 0, type: "wrong" }] },
+        { question: "7. Besar mana rasa kepedulian sayang kat b ni?", options: [{ text: "Besar Galaxy", score: 100, type: "correct" }, { text: "Separuh", score: 50, type: "half" }, { text: "Nape tanya", score: 0, type: "wrong" }] },
+        { question: "8. Pernah tak... sayang <strong>terpikir/imaginasi</strong> tentang \"masa depan\" dengan b tak?", options: [{ text: "Banyak sangattt", score: 100, type: "correct" }, { text: "Kadang\" je", score: 50, type: "half" }, { text: "Jarang", score: 0, type: "wrong" }] },
+        { question: "9. Berapa percent pentingnya b dalam hidup sayang?", options: [{ text: "25%", score: 0, type: "wrong" }, { text: "50%", score: 50, type: "half" }, { text: "75%", score: 50, type: "half" }, { text: "99.9%", score: 75, type: "correct" }, { text: "100%", score: 100, type: "correct" }] },
+        { question: "10. Sayang betul-betul cintakan b?", options: [{ text: "Dengan sepenuh hati b", score: 100, type: "correct" }, { text: "Mungkin", score: 50, type: "half" }, { text: "Tak yakinlah", score: 0, type: "wrong" }] }
+    ];
 
-            backgroundMusic.volume = 0.75;
-            birthdayMusic.volume = 0.75;
-            clickSound.volume = 0.75;
+    document.addEventListener('DOMContentLoaded', function() {
+        const lockOverlay = document.getElementById('lockOverlay');
+        const introOverlay = document.getElementById('introOverlay');
+        const finishOverlay = document.getElementById('finishOverlay');
+        const coverOverlay = document.getElementById('coverOverlay');
+        const mainContent = document.getElementById('mainContent');
+        const backgroundLayer = document.getElementById('backgroundLayer');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        const birthdayMusic = document.getElementById('birthdayMusic');
+        const welcomeSound = document.getElementById('welcomeSound');
+        const awardsSound = document.getElementById('awardsSound');
+        const clickSound = document.getElementById('clickSound');
+        const video = document.getElementById('specialVideo');
+        const bgVolume = document.getElementById('bgVolume');
+        const clickVolume = document.getElementById('clickVolume');
+        const introGif = document.querySelector('.intro-gif');
+        const introTitle = document.getElementById('introTitle');
+        const introSubtitle = document.getElementById('introSubtitle');
+        const introText = document.getElementById('introText');
+        const introHeartLayer = document.getElementById('introHeartLayer');
 
-            lockOverlay.classList.add('active');
+        backgroundMusic.volume = 0.75;
+        birthdayMusic.volume = 0.75;
+        clickSound.volume = 0.75;
 
-            bgVolume.addEventListener('input', function() {
-                const activeMusic = document.getElementById('loveLetter').style.display === 'block' ? birthdayMusic : backgroundMusic;
-                activeMusic.volume = this.value / 100;
-                if (activeMusic.volume === 0) {
-                    document.getElementById('muteBtn').textContent = '🔇';
-                    document.getElementById('muteBtn').classList.add('muted');
-                    wasMutedManually = true;
-                } else {
-                    document.getElementById('muteBtn').textContent = '🔊';
-                    document.getElementById('muteBtn').classList.remove('muted');
-                    wasMutedManually = false;
-                }
-            });
-            
-            clickVolume.addEventListener('input', function() {
-                clickSound.volume = this.value / 100;
-            });
-            
-            introOverlay.addEventListener('click', function() {
-                if (introOverlay.style.pointerEvents === 'auto') {
-                    introOverlay.classList.add('fade-out');
-                    welcomeSound.pause();
-                    setTimeout(() => {
-                        introOverlay.style.display = 'none';
-                        mainContent.style.display = 'block';
-                        mainContent.classList.add('fade-in');
-                        createSoftBackground(backgroundLayer);
-                        if (!wasMutedManually) backgroundMusic.play();
-                        positionLoveHeart();
-                    }, 500);
-                }
-            });
+        lockOverlay.classList.add('active');
 
-            finishOverlay.addEventListener('click', function() {
-                if (finishOverlay.style.pointerEvents === 'auto') {
-                    finishOverlay.classList.add('fade-out');
-                    coverOverlay.classList.add('fade-out');
-                    awardsSound.pause();
-                    clearInterval(heartLoop);
-                    clearInterval(sparkleLoop);
-                    setTimeout(() => {
-                        finishOverlay.style.display = 'none';
-                        coverOverlay.style.display = 'none';
-                        mainContent.style.display = 'block';
-                        mainContent.classList.add('fade-in');
-                        showLoveLetter();
-                        if (!wasMutedManually) birthdayMusic.play();
-                    }, 1500);
-                }
-            });
-
-            video.addEventListener('play', function() {
-                birthdayMusic.pause();
+        bgVolume.addEventListener('input', function() {
+            const activeMusic = document.getElementById('loveLetter').style.display === 'block' ? birthdayMusic : backgroundMusic;
+            activeMusic.volume = this.value / 100;
+            if (activeMusic.volume === 0) {
                 document.getElementById('muteBtn').textContent = '🔇';
                 document.getElementById('muteBtn').classList.add('muted');
-            });
-            video.addEventListener('pause', function() {
-                if (!wasMutedManually) {
-                    birthdayMusic.play();
-                    document.getElementById('muteBtn').textContent = '🔊';
-                    document.getElementById('muteBtn').classList.remove('muted');
-                }
-            });
-
-            window.addEventListener('resize', positionLoveHeart);
+                wasMutedManually = true;
+            } else {
+                document.getElementById('muteBtn').textContent = '🔊';
+                document.getElementById('muteBtn').classList.remove('muted');
+                wasMutedManually = false;
+            }
+        });
+        
+        clickVolume.addEventListener('input', function() {
+            clickSound.volume = this.value / 100;
+        });
+        
+        introOverlay.addEventListener('click', function() {
+            if (introOverlay.style.pointerEvents === 'auto') {
+                introOverlay.classList.add('fade-out');
+                welcomeSound.pause();
+                setTimeout(() => {
+                    introOverlay.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    mainContent.classList.add('fade-in');
+                    createSoftBackground(backgroundLayer);
+                    if (!wasMutedManually) backgroundMusic.play();
+                    positionLoveHeart();
+                }, 500);
+            }
         });
 
-        function enterPin(num) {
-            if (attemptsLeft <= 0) return;
-            document.getElementById('clickSound').play();
-            createLoveEffect(event);
-            if (pinInput.length < 4) {
-                pinInput.push(num);
-                updatePinDisplay();
+        finishOverlay.addEventListener('click', function() {
+            if (finishOverlay.style.pointerEvents === 'auto') {
+                finishOverlay.classList.add('fade-out');
+                coverOverlay.classList.add('fade-out');
+                awardsSound.pause();
+                clearInterval(heartLoop);
+                clearInterval(sparkleLoop);
+                setTimeout(() => {
+                    finishOverlay.style.display = 'none';
+                    coverOverlay.style.display = 'none';
+                    mainContent.style.display = 'block';
+                    mainContent.classList.add('fade-in');
+                    showLoveLetter();
+                    if (!wasMutedManually) birthdayMusic.play();
+                }, 1500);
             }
-        }
+        });
 
-        function backspacePin() {
-            if (attemptsLeft <= 0) return;
-            document.getElementById('clickSound').play();
-            createLoveEffect(event);
-            if (pinInput.length > 0) {
-                pinInput.pop();
-                updatePinDisplay();
+        video.addEventListener('play', function() {
+            birthdayMusic.pause();
+            document.getElementById('muteBtn').textContent = '🔇';
+            document.getElementById('muteBtn').classList.add('muted');
+        });
+        video.addEventListener('pause', function() {
+            if (!wasMutedManually) {
+                birthdayMusic.play();
+                document.getElementById('muteBtn').textContent = '🔊';
+                document.getElementById('muteBtn').classList.remove('muted');
             }
+        });
+
+        window.addEventListener('resize', positionLoveHeart);
+    });
+
+    function enterPin(num) {
+        if (attemptsLeft <= 0) return;
+        document.getElementById('clickSound').play();
+        createLoveEffect(event);
+        if (pinInput.length < 4) {
+            pinInput.push(num);
+            updatePinDisplay();
         }
+    }
+
+    function backspacePin() {
+        if (attemptsLeft <= 0) return;
+        document.getElementById('clickSound').play();
+        createLoveEffect(event);
+        if (pinInput.length > 0) {
+            pinInput.pop();
+            updatePinDisplay();
+        }
+    }
 function submitPin() {
             if (attemptsLeft <= 0) return;
             document.getElementById('clickSound').play();
@@ -1157,322 +1176,315 @@ function submitPin() {
             document.getElementById(`question${currentQuestion}`).classList.add('active');
         }
 function showFinishOverlay() {
-            const finishOverlay = document.getElementById('finishOverlay');
-            const finishGif = document.querySelector('.finish-gif');
-            const finishText = document.getElementById('finishText');
-            const finishReady = document.getElementById('readyText');
-            const countdown = document.getElementById('countdown');
-            const lockText = document.getElementById('lockText');
-            const heartLayer = document.getElementById('heartLayer');
-            const mainContent = document.getElementById('mainContent');
+    const finishOverlay = document.getElementById('finishOverlay');
+    const finishGif = document.querySelector('.finish-gif');
+    const finishText = document.getElementById('finishText');
+    const readyText = document.getElementById('readyText');
+    const countdown = document.getElementById('countdown');
+    const lockText = document.getElementById('lockText');
+    const heartLayer = document.getElementById('heartLayer');
+    const mainContent = document.getElementById('mainContent');
 
-            mainContent.style.display = 'none';
-            finishOverlay.style.display = 'flex';
-            finishOverlay.classList.add('active');
-            document.getElementById('awardsSound').play();
-            startHeartLoop(heartLayer);
-            startSparkleLoop(heartLayer);
-            
+    mainContent.style.display = 'none';
+    finishOverlay.style.display = 'flex';
+    finishOverlay.classList.add('active');
+    document.getElementById('awardsSound').play();
+    startHeartLoop(heartLayer);
+    startSparkleLoop(heartLayer);
+    
+    setTimeout(() => {
+        finishGif.style.opacity = 1;
+        setTimeout(() => {
+            finishGif.classList.add('float-up');
             setTimeout(() => {
-                finishGif.style.opacity = 1;
-                setTimeout(() => {
-                    finishGif.classList.add('float-up');
+                typeText(finishText, "Yeayy !! finally sayang dah sampai kat peringkat terakhir !", 100, () => {
+                    finishText.classList.add('float-up-text');
                     setTimeout(() => {
-                        typeText(finishText, "Yeayy !! finally sayang dah sampai kat peringkat terakhir !", 100, () => {
-                            finishText.classList.add('float-up-text');
+                        typeText(readyText, "Sayang dah ready .. ?", 100, () => {
+                            readyText.classList.add('float-up-text');
                             setTimeout(() => {
-                                typeText(finishReady, "Sayang dah ready .. ?", 100, () => {
-                                    finishReady.classList.add('float-up-text');
+                                startCountdown(countdown, () => {
+                                    countdown.classList.add('float-up-text');
                                     setTimeout(() => {
-                                        startCountdown(countdown, () => {
-                                            countdown.classList.add('float-up-text');
-                                            setTimeout(() => {
-                                                lockText.textContent = "Dah boleh tekan skrin...";
-                                                lockText.style.opacity = 1;
-                                                lockText.classList.add('float-up-text');
-                                                lockText.classList.add('pop-out');
-                                                finishOverlay.style.pointerEvents = 'auto';
-                                                startShakeTimer(finishOverlay, lockText, 'finish');
-                                            }, 500);
-                                        });
+                                        lockText.textContent = "Dah boleh tekan skrin...";
+                                        lockText.style.opacity = 1;
+                                        lockText.classList.add('float-up-text');
+                                        lockText.classList.add('pop-out');
+                                        finishOverlay.style.pointerEvents = 'auto';
+                                        startShakeTimer(finishOverlay, lockText, 'finish');
                                     }, 500);
                                 });
-                            }, 2000);
+                            }, 500);
                         });
-                    }, 1000);
-                }, 500);
-            }, 1000);
-        }
-
-        function startCountdown(element, callback) {
-            let count = 3;
-            const countdownInterval = setInterval(() => {
-                element.textContent = count;
-                element.style.opacity = 1;
-                element.classList.remove('float-up-text');
-                setTimeout(() => element.classList.add('float-up-text'), 10);
-                count--;
-                if (count < 0) {
-                    clearInterval(countdownInterval);
-                    element.textContent = "↓";
-                    element.classList.add('arrow');
-                    setTimeout(() => {
-                        if (callback) callback();
                     }, 2000);
-                }
+                });
+            }, 1000);
+        }, 500);
+    }, 1000);
+}
+
+function startCountdown(element, callback) {
+    let count = 3;
+    const countdownInterval = setInterval(() => {
+        element.textContent = count;
+        element.style.opacity = 1;
+        element.classList.remove('float-up-text');
+        setTimeout(() => element.classList.add('float-up-text'), 10);
+        count--;
+        if (count < 0) {
+            clearInterval(countdownInterval);
+            element.textContent = "↓";
+            element.classList.add('arrow');
+            setTimeout(() => {
+                if (callback) callback();
             }, 2000);
         }
+    }, 2000);
+}
 
-        function startShakeTimer(overlay, textElement, type) {
-            let clicked = false;
-            overlay.addEventListener('click', () => {
-                clicked = true;
-                clearInterval(shakeInterval);
-            }, { once: true });
-            const shakeInterval = setInterval(() => {
-                if (!clicked && overlay.style.pointerEvents === 'auto') {
-                    textElement.classList.add('shake-text');
-                    setTimeout(() => textElement.classList.remove('shake-text'), 800);
-                }
-            }, 10000);
+function startShakeTimer(overlay, textElement, type) {
+    let clicked = false;
+    overlay.addEventListener('click', () => {
+        clicked = true;
+        clearInterval(shakeInterval);
+    }, { once: true });
+    const shakeInterval = setInterval(() => {
+        if (!clicked && overlay.style.pointerEvents === 'auto') {
+            textElement.classList.add('shake-text');
+            setTimeout(() => textElement.classList.remove('shake-text'), 800);
         }
+    }, 10000);
+}
 
-        function typeText(element, text, speed = 100, callback) {
-            let i = 0;
-            element.textContent = '';
-            element.style.opacity = 1;
-            const interval = setInterval(() => {
-                if (i < text.length) {
-                    element.textContent += text.charAt(i);
-                    i++;
-                } else {
-                    clearInterval(interval);
-                    if (callback) callback();
-                }
-            }, speed);
+function typeText(element, text, speed = 100, callback) {
+    let i = 0;
+    element.textContent = '';
+    element.style.opacity = 1;
+    const interval = setInterval(() => {
+        if (i < text.length) {
+            element.textContent += text.charAt(i);
+            i++;
+        } else {
+            clearInterval(interval);
+            if (callback) callback();
         }
+    }, speed);
+}
 
-        function handleEnter(e, callback) {
-            if (e.key === 'Enter') callback();
-        }
+function handleEnter(e, callback) {
+    if (e.key === 'Enter') callback();
+}
 
-        function checkColorAnswer() {
-            if (isSubmitted) return;
-            const answer = document.getElementById('colorAnswer').value.trim().toLowerCase();
-            const submitButton = document.getElementById('submitColor');
-            const inputField = document.getElementById('colorAnswer');
-            
-            if (!answer) {
-                new Audio('error sound.mp3').play();
-                if (navigator.vibrate) navigator.vibrate(200);
-                submitButton.className = '';
-                submitButton.classList.add('wrong');
-                inputField.classList.add('shake');
-                setTimeout(() => inputField.classList.remove('shake'), 500);
-                return;
-            }
-            
-            document.getElementById('clickSound').play();
-            createLoveEffect(event);
-            createFloatingCircle(event);
-            let score = 0;
-            let type = 'wrong';
-            if (answer.includes('biru')) { score = 100; type = 'correct'; }
-            else if (answer.includes('hitam')) { score = 75; type = 'correct'; }
-            
-            submitButton.className = '';
-            submitButton.classList.add(type);
-            answers[1] = { question: document.querySelector('#question2 h3').textContent, answer, type, score };
-            if (!answer.includes('biru') && !answer.includes('hitam')) {
-                allQuestions[1].options.push({ text: answer, score, type });
-            }
-            
-            totalScore += score;
-            updateProgressBar();
-            disableOptions(2);
-            document.getElementById('question2').classList.remove('active');
-            currentQuestion++;
-            document.getElementById(`question${currentQuestion}`).classList.add('active');
-        }
+function checkColorAnswer() {
+    if (isSubmitted) return;
+    const answer = document.getElementById('colorAnswer').value.trim().toLowerCase();
+    const submitButton = document.getElementById('submitColor');
+    const inputField = document.getElementById('colorAnswer');
+    
+    if (!answer) {
+        new Audio('error sound.mp3').play();
+        if (navigator.vibrate) navigator.vibrate(200);
+        submitButton.className = '';
+        submitButton.classList.add('wrong');
+        inputField.classList.add('shake');
+        setTimeout(() => inputField.classList.remove('shake'), 500);
+        return;
+    }
+    
+    document.getElementById('clickSound').play();
+    createLoveEffect(event);
+    let score = 0;
+    let type = 'wrong';
+    if (answer.includes('biru')) { score = 100; type = 'correct'; }
+    else if (answer.includes('hitam')) { score = 75; type = 'correct'; }
+    
+    submitButton.className = '';
+    submitButton.classList.add(type);
+    answers[1] = { question: document.querySelector('#question2 h3').textContent, answer, type, score };
+    if (!answer.includes('biru') && !answer.includes('hitam')) {
+        allQuestions[1].options.push({ text: answer, score, type });
+    }
+    
+    totalScore += score;
+    updateProgressBar();
+    disableOptions(2);
+    document.getElementById('question2').classList.remove('active');
+    currentQuestion++;
+    document.getElementById(`question${currentQuestion}`).classList.add('active');
+}
 
-        function checkDateAnswer() {
-            if (isSubmitted) return;
-            const answer = document.getElementById('dateAnswer').value.trim().toLowerCase();
-            const submitButton = document.getElementById('submitDate');
-            const inputField = document.getElementById('dateAnswer');
-            
-            if (!answer) {
-                new Audio('error sound.mp3').play();
-                if (navigator.vibrate) navigator.vibrate(200);
-                submitButton.className = '';
-                submitButton.classList.add('wrong');
-                inputField.classList.add('shake');
-                setTimeout(() => inputField.classList.remove('shake'), 500);
-                return;
-            }
-            
-            document.getElementById('clickSound').play();
-            createLoveEffect(event);
-            createFloatingCircle(event);
-            let score = 0;
-            let type = 'wrong';
-            const datePattern = /(19\s*(th)?\s*(disember|december|dis|dec)(\s*(2022|22))?|(19)[./-]\s*(12|dis|dec)(\s*[./-]?\s*(2022|22))?)/i;
-            if (datePattern.test(answer)) { score = 100; type = 'correct'; }
-            
-            submitButton.className = '';
-            submitButton.classList.add(type);
-            answers[3] = { question: document.querySelector('#question4 h3').textContent, answer, type, score };
-            if (score === 0) allQuestions[3].options.push({ text: answer, score, type });
-            
-            totalScore += score;
-            updateProgressBar();
-            disableOptions(4);
-            document.getElementById('question4').classList.remove('active');
-            currentQuestion++;
-            document.getElementById(`question${currentQuestion}`).classList.add('active');
-        }
+function checkDateAnswer() {
+    if (isSubmitted) return;
+    const answer = document.getElementById('dateAnswer').value.trim().toLowerCase();
+    const submitButton = document.getElementById('submitDate');
+    const inputField = document.getElementById('dateAnswer');
+    
+    if (!answer) {
+        new Audio('error sound.mp3').play();
+        if (navigator.vibrate) navigator.vibrate(200);
+        submitButton.className = '';
+        submitButton.classList.add('wrong');
+        inputField.classList.add('shake');
+        setTimeout(() => inputField.classList.remove('shake'), 500);
+        return;
+    }
+    
+    document.getElementById('clickSound').play();
+    createLoveEffect(event);
+    let score = 0;
+    let type = 'wrong';
+    const datePattern = /(19\s*(th)?\s*(disember|december|dis|dec)(\s*(2022|22))?|(19)[./-]\s*(12|dis|dec)(\s*[./-]?\s*(2022|22))?)/i;
+    if (datePattern.test(answer)) { score = 100; type = 'correct'; }
+    
+    submitButton.className = '';
+    submitButton.classList.add(type);
+    answers[3] = { question: document.querySelector('#question4 h3').textContent, answer, type, score };
+    if (score === 0) allQuestions[3].options.push({ text: answer, score, type });
+    
+    totalScore += score;
+    updateProgressBar();
+    disableOptions(4);
+    document.getElementById('question4').classList.remove('active');
+    currentQuestion++;
+    document.getElementById(`question${currentQuestion}`).classList.add('active');
+}
 
-        function updateProgressBar() {
-            const percentage = Math.min(Math.round((totalScore / maxScore) * 100), 100);
-            const progressBar = document.getElementById('progressBar');
-            progressBar.style.width = percentage + '%';
-            if (percentage < 30) {
-                progressBar.style.background = '#e74c3c';
-            } else if (percentage < 60) {
-                progressBar.style.background = '#ff9a9e';
-            } else if (percentage < 80) {
-                progressBar.style.background = '#3498db';
-            } else {
-                progressBar.style.background = '#2ecc71';
-            }
-            progressBar.textContent = `${percentage}%`;
-            progressBar.classList.add('shake-progress');
-            setTimeout(() => progressBar.classList.remove('shake-progress'), 500);
-            updateLoveHeart(percentage);
-        }
+function updateProgressBar() {
+    const percentage = Math.min(Math.round((totalScore / maxScore) * 100), 100);
+    const progressBar = document.getElementById('progressBar');
+    progressBar.style.width = percentage + '%';
+    if (percentage < 30) {
+        progressBar.style.background = '#e74c3c';
+    } else if (percentage < 60) {
+        progressBar.style.background = '#ff9a9e';
+    } else if (percentage < 80) {
+        progressBar.style.background = '#3498db';
+    } else {
+        progressBar.style.background = '#2ecc71';
+    }
+    progressBar.textContent = `${percentage}%`;
+    progressBar.classList.add('shake-progress');
+    setTimeout(() => progressBar.classList.remove('shake-progress'), 500);
+    updateLoveHeart(percentage);
+}
 
-        function showLoveLetter() {
-            const loveLetter = document.getElementById('loveLetter');
-            loveLetter.style.display = 'block';
-            loveLetter.scrollIntoView({ behavior: 'smooth' });
-        }
+function showLoveLetter() {
+    const loveLetter = document.getElementById('loveLetter');
+    loveLetter.style.display = 'block';
+    loveLetter.scrollIntoView({ behavior: 'smooth' });
+}
 
-        function sendEmail() {
-            const emailBody = answers.map((ans, index) => 
-                `${index + 1}. ${ans.question}\n   Jawapan: ${ans.answer} (${ans.score} markah)`
-            ).join('\n\n') + `\n\nJumlah Skor: ${totalScore}/${maxScore} (${Math.round((totalScore / maxScore) * 100)}%)`;
-            
-            fetch('https://formspree.io/f/xqapwldd', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email: 'mdanialarif07@gmail.com', message: emailBody })
-            }).then(response => {
-                if (response.ok) console.log('Email sent successfully');
-                else console.error('Failed to send email');
-            }).catch(error => console.error('Error:', error));
-        }
+function sendEmail() {
+    const emailBody = answers.map((ans, index) => 
+        `${index + 1}. ${ans.question}\n   Jawapan: ${ans.answer} (${ans.score} markah)`
+    ).join('\n\n') + `\n\nJumlah Skor: ${totalScore}/${maxScore} (${Math.round((totalScore / maxScore) * 100)}%)`;
+    
+    fetch('https://formspree.io/f/xqapwldd', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: 'mdanialarif07@gmail.com', message: emailBody })
+    }).then(response => {
+        if (response.ok) console.log('Email sent successfully');
+        else console.error('Failed to send email');
+    }).catch(error => console.error('Error:', error));
+}
 
-        function showReview() {
-            document.getElementById('clickSound').play();
-            createLoveEffect(event);
-            createFloatingCircle(event);
-            const reviewContent = document.getElementById('reviewContent');
-            reviewContent.innerHTML = '';
-            allQuestions.forEach((q, index) => {
-                const qDiv = document.createElement('div');
-                qDiv.className = 'review-question';
-                qDiv.innerHTML = `<strong>${q.question}</strong>`;
-                q.options.forEach(option => {
-                    const isSelected = answers[index] && answers[index].answer === option.text;
-                    const aDiv = document.createElement('div');
-                    aDiv.className = `review-answer review-${option.type}${isSelected ? ' review-selected' : ''}`;
-                    aDiv.innerHTML = `${option.text} (${option.score} markah)`;
-                    qDiv.appendChild(aDiv);
-                });
-                reviewContent.appendChild(qDiv);
-            });
-            document.getElementById('reviewContainer').style.display = 'block';
-            document.getElementById('reviewBtn').style.display = 'none';
-            document.getElementById('loveLetter').style.display = 'none';
-        }
+function showReview() {
+    document.getElementById('clickSound').play();
+    createLoveEffect(event);
+    const reviewContent = document.getElementById('reviewContent');
+    reviewContent.innerHTML = '';
+    allQuestions.forEach((q, index) => {
+        const qDiv = document.createElement('div');
+        qDiv.className = 'review-question';
+        qDiv.innerHTML = `<strong>${q.question}</strong>`;
+        q.options.forEach(option => {
+            const isSelected = answers[index] && answers[index].answer === option.text;
+            const aDiv = document.createElement('div');
+            aDiv.className = `review-answer review-${option.type}${isSelected ? ' review-selected' : ''}`;
+            aDiv.innerHTML = `${option.text} (${option.score} markah)`;
+            qDiv.appendChild(aDiv);
+        });
+        reviewContent.appendChild(qDiv);
+    });
+    document.getElementById('reviewContainer').style.display = 'block';
+    document.getElementById('reviewBtn').style.display = 'none';
+    document.getElementById('loveLetter').style.display = 'none';
+}
 
-        function hideReview() {
-            document.getElementById('clickSound').play();
-            createLoveEffect(event);
-            createFloatingCircle(event);
-            const reviewContainer = document.getElementById('reviewContainer');
-            const reviewBtn = document.getElementById('reviewBtn');
-            const loveLetter = document.getElementById('loveLetter');
-            reviewContainer.style.display = 'none';
-            reviewBtn.style.display = 'block';
-            loveLetter.style.display = 'block';
-        }
+function hideReview() {
+    document.getElementById('clickSound').play();
+    createLoveEffect(event);
+    const reviewContainer = document.getElementById('reviewContainer');
+    const reviewBtn = document.getElementById('reviewBtn');
+    const loveLetter = document.getElementById('loveLetter');
+    reviewContainer.style.display = 'none';
+    reviewBtn.style.display = 'block';
+    loveLetter.style.display = 'block';
+}
 
-        function toggleMute() {
-            document.getElementById('clickSound').play();
-            createLoveEffect(event);
-            createFloatingCircle(event);
-            const backgroundMusic = document.getElementById('backgroundMusic');
-            const birthdayMusic = document.getElementById('birthdayMusic');
-            const muteBtn = document.getElementById('muteBtn');
-            const bgVolume = document.getElementById('bgVolume');
-            const activeMusic = document.getElementById('loveLetter').style.display === 'block' ? birthdayMusic : backgroundMusic;
-            
-            if (activeMusic.paused || activeMusic.muted) {
-                activeMusic.muted = false;
-                activeMusic.play();
-                muteBtn.textContent = '🔊';
-                muteBtn.classList.remove('muted');
-                bgVolume.value = activeMusic.volume * 100;
-                wasMutedManually = false;
-            } else {
-                activeMusic.muted = true;
-                activeMusic.pause();
-                muteBtn.textContent = '🔇';
-                muteBtn.classList.add('muted');
-                bgVolume.value = 0;
-                wasMutedManually = true;
-            }
-        }
+function toggleMute() {
+    document.getElementById('clickSound').play();
+    createLoveEffect(event);
+    const backgroundMusic = document.getElementById('backgroundMusic');
+    const birthdayMusic = document.getElementById('birthdayMusic');
+    const muteBtn = document.getElementById('muteBtn');
+    const bgVolume = document.getElementById('bgVolume');
+    const activeMusic = document.getElementById('loveLetter').style.display === 'block' ? birthdayMusic : backgroundMusic;
+    
+    if (activeMusic.paused || activeMusic.muted) {
+        activeMusic.muted = false;
+        activeMusic.play();
+        muteBtn.textContent = '🔊';
+        muteBtn.classList.remove('muted');
+        bgVolume.value = activeMusic.volume * 100;
+        wasMutedManually = false;
+    } else {
+        activeMusic.muted = true;
+        activeMusic.pause();
+        muteBtn.textContent = '🔇';
+        muteBtn.classList.add('muted');
+        bgVolume.value = 0;
+        wasMutedManually = true;
+    }
+}
 
-        function showVideo() {
-            document.getElementById('clickSound').play();
-            createLoveEffect(event);
-            createFloatingCircle(event);
-            const videoContainer = document.getElementById('videoContainer');
-            const playBtn = document.querySelector('.play-video-btn');
-            videoContainer.style.display = 'block';
-            playBtn.style.display = 'none';
-            document.getElementById('specialVideo').play();
-            videoContainer.scrollIntoView({ behavior: 'smooth' });
-        }
+function showVideo(videoNum) {
+    document.getElementById('clickSound').play();
+    createLoveEffect(event);
+    const videoContainer = document.getElementById('videoContainer');
+    const video = document.getElementById('specialVideo');
+    const videoSource = document.getElementById('videoSource');
+    const videoButtons = document.querySelector('.video-buttons');
+    
+    const videoFiles = {
+        1: 'Happy Birthday - Ariana 1.mp4',
+        2: 'Happy Birthday - Ariana 2.mp4',
+        3: 'Happy Birthday - Ariana 3.mp4',
+        4: 'Happy Birthday - Ariana 4.mp4'
+    };
+    
+    videoSource.src = videoFiles[videoNum];
+    video.load();
+    videoContainer.style.display = 'block';
+    videoButtons.style.display = 'none';
+    video.play();
+    videoContainer.scrollIntoView({ behavior: 'smooth' });
+}
 
-        function hideVideo() {
-            document.getElementById('clickSound').play();
-            createLoveEffect(event);
-            createFloatingCircle(event);
-            const videoContainer = document.getElementById('videoContainer');
-            const playBtn = document.querySelector('.play-video-btn');
-            const video = document.getElementById('specialVideo');
-            videoContainer.style.display = 'none';
-            playBtn.style.display = 'block';
-            video.pause();
-            if (!wasMutedManually) document.getElementById('birthdayMusic').play();
-            document.getElementById('loveLetter').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function createFloatingCircle(event) {
-            const symbols = ['🌸', '❤', '💖', '🌷', '💞'];
-            const circle = document.createElement('div');
-            circle.className = 'floating-circle';
-            circle.textContent = symbols[Math.floor(Math.random() * symbols.length)];
-            circle.style.left = `${event.clientX}px`;
-            circle.style.top = `${event.clientY}px`;
-            document.body.appendChild(circle);
-            setTimeout(() => circle.remove(), 2000);
-        }
-
-        document.addEventListener('click', createFloatingCircle);
-    </script>
+function hideVideo() {
+    document.getElementById('clickSound').play();
+    createLoveEffect(event);
+    const videoContainer = document.getElementById('videoContainer');
+    const videoButtons = document.querySelector('.video-buttons');
+    const video = document.getElementById('specialVideo');
+    
+    videoContainer.style.display = 'none';
+    videoButtons.style.display = 'flex';
+    video.pause();
+    if (!wasMutedManually) document.getElementById('birthdayMusic').play();
+    document.getElementById('loveLetter').scrollIntoView({ behavior: 'smooth' });
+}
+</script>
 </body>
 </html>
