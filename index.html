@@ -713,10 +713,12 @@
             gap: 12px;
         }
         .lock-btn {
+            width: 70px;
+            height: 70px;
             background: linear-gradient(45deg, #ff80ab, #f06292);
             color: white;
             border: none;
-            padding: 18px;
+            padding: 0;
             border-radius: 50%;
             font-size: 20px;
             cursor: pointer;
@@ -724,6 +726,10 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
             position: relative;
             overflow: hidden;
+            box-sizing: border-box;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .lock-btn::after {
             content: '';
@@ -897,7 +903,18 @@
             .volume-control label { font-size: 10px; }
             .lock-title { font-size: 32px; }
             .lock-display { font-size: 22px; }
-            .lock-btn { padding: 14px; font-size: 16px; }
+            .lock-buttons {
+                grid-template-columns: repeat(3, 60px);
+                gap: 10px;
+            }
+            .lock-btn {
+                width: 60px;
+                height: 60px;
+                padding: 0;
+                font-size: 16px;
+                border-radius: 50%;
+                box-sizing: border-box;
+            }
             .lock-status { font-size: 14px; }
             input[type="range"] { width: 80px; }
             .love-heart { font-size: 8px; }
