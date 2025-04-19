@@ -1857,33 +1857,6 @@ function hideVideo() {
     if (!wasMutedManually) document.getElementById('birthdayMusic').play();
     document.getElementById('loveLetter').scrollIntoView({ behavior: 'smooth' });
 }
-
-function createTouchEffect(event) {
-    const emojis = ['❤️', '🌸', '💕', '🌷', '💖', '🥰'];
-    const randomEmoji = emojis[Math.floor(Math.random() * emojis.length)];
-    
-    let x, y;
-    if (event.type === 'touchstart') {
-        x = event.touches[0].clientX;
-        y = event.touches[0].clientY;
-    } else {
-        x = event.clientX;
-        y = event.clientY;
-    }
-    
-    const circle = document.createElement('div');
-    circle.className = 'touch-circle';
-    circle.textContent = randomEmoji;
-    circle.style.left = `${x - 15}px`; // Offset to center the circle
-    circle.style.top = `${y - 15}px`;
-    document.body.appendChild(circle);
-    
-    setTimeout(() => circle.remove(), 2000);
-}
-
-// Add event listeners for touch and click
-document.addEventListener('touchstart', createTouchEffect);
-document.addEventListener('click', createTouchEffect);
 </script>
 </body>
 </html>
